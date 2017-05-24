@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>to do box</title>
+</head>
+<style type="text/css">
+*{
+  margin:0;
+  padding:0;
+}
+
+ul{
+  list-style: none;
+}
+h1,#container{
+  width:550px;
+  margin:auto;
+}
+#container input{
+    width:100%;
+    height:50px;
+    font-size:20px;
+  }
+#container ul{
+  background: pink;
+  font-size: 20px;
+  width:100%;
+  border:2px solid #ddd;
+
+}
+#container li{
+  height:50px;
+  line-height: 50px;
+  border-bottom: 2px solid #ddd;
+}
+#container li span{
+  display: inline-block;
+  color:#999;
+  float: right;
+
+}
+.circle{
+  width:30px;
+  height:30px;
+  border:1px solid #666;
+  border-radius: 50%;
+  float: left;
+  margin-right: 20px;
+  margin-top:10px;
+}
+
+a{
+  display: inline-block;
+  text-decoration: none;
+  margin-right: 30px;
+  border:1px solid transparent;
+}
+a:not(:first-child):hover,a.hover{
+  border:1px solid orange;
+}
+a:last-child:hover{
+  border:1px solid transparent;
+  border-bottom: 2px solid #f40;
+}
+.del{
+  color:#999;
+  text-decoration: line-through;
+}
+p{
+  display: inline-block;
+}
+#summary{
+  width: 100%;
+  height:30px;
+  line-height: 30px;
+  background: #ccc;
+  border:2px solid #bbb;
+  display: none;
+}
+
+</style>
+<body>
+<h1>todos</h1>
+<div id="container">
+  <input type="text" name="totoText" placeholder="What need to be done?" value="">
+  <ul id="todoList">
+  <!-- <li></li> -->
+  </ul>
+  <div id="summary">
+    <a><b id="count">0 </b>items left</a>
+    <a class="hover">All</a>
+    <a>Active</a>
+    <a>Complete</a>
+    <a style="display: none;">Clear completed</a>
+  </div>
+</div>
+
+
+<script type="text/javascript" src="js/jquery-3.2.0.min.js"></script>
+
+<script type="text/javascript">
+"use strict";
+//S1:input里输入值下拉框中显示的内容
+var val=$("#container input").keydown(function(e){
+  var text;
+  if(e.keyCode===13){
+    text=$(this).val();
+    text = $.trim(text);
+    // console.log(text);
+    if(text){
+      $(this).attr("value",text);//将值设置回value属性中。
+      $("#todoList").prepend(`<li>
+                                <div class="circle" data-select="0"></div>
+                                <p>${text}</p>
+              
+                               </li>`);
+
+    $(this).val("");
+    $("#summary").css("display","block");
+    getLeftItems();
+  }
+  }
+});
+  
+//S2:hover在事项列表中出现小叉，点击可以删除
+$("ul").on("mouseenter","li",function(){
+    $(this).append(`<span>&times;<span>`);
+    $("span").next().remove();
+  
+  });
+$("ul").on("mouseleave","li",function(){
+    $(this).children("span").remove();
+  });//hover时间有两个参数函数，移入和移除。
+
+$("ul").on("click","span",function(){
+  $(this).parent().fadeOut();
+});
+
+//S3:鼠标点击选中事项，再点击
+$("ul").on("click",".circle",function(){
+  if($(this).attr("data-select")=="0"){
+    $(this).css("background","green");
+    $(this).next().addClass("del");
+    $(this).attr("data-select","1");
+  }else{
+      $(this).css("background","none");
+      $("ul li p").removeClass("del");
+      //$("#summary a:contains('Clear completed')").hide();
+      $(this).attr("data-select","0");
+
+  }
+  getLeftItems();
+  getClear();  
+});
+
+//S4:对#summary 中各个件的操作
+function getAll () {
+  $("#summary a:contains('All')").click(function(){
+    $(this).addClass("hover").siblings().removeClass("hover");
+    $("ul li").show();
+  });
+}
+function getActive () {
+  $("#summary a:contains('Active')").click(function(){
+    if($("#todoList li:hidden").length!=0){
+        $("#todoList li:hidden").show()
+      }else{
+        $(this).addClass("hover").siblings().removeClass("hover");
+        $("ul li .circle[data-select=1]").parent().hide();
+      }
+    });
+}
+function getComplete () {
+  $("#summary a:contains('Complete')").click(function(){
+    if($("#todoList li:hidden").length!=0){
+        $("#todoList li:hidden").show()
+      }else{
+        $(this).addClass("hover").siblings().removeClass("hover");
+        $("ul li .circle[data-select=0]").parent().hide();
+      }
+    
+    
+  });
+}
+function clearComplete () {
+  $("#summary a:contains('Clear completed')").click(function(){
+    $(this).addClass("hover").siblings().removeClass("hover");
+    $("ul li .circle[data-select=1]").parent().remove();
+});
+}
+
+function getLeftItems(){
+  var j=$("ul li .circle[data-select=0]").length;
+    $("#count").html(j);
+  };
+  getAll ();
+  getActive ();
+  getComplete ();
+  clearComplete ();
+  
+//S5:对清除键Clear completed的操作
+function getClear(){
+  if($("ul li .circle[data-select=1]").length!=0){
+    $("#summary a:contains('Clear completed')").show();
+  }else{
+    $("#summary a:contains('Clear completed')").hide();
+  }
+}
+
+
+
+
+
+
+  
+
+
+
+
+
+
+</script>
+</body>
+</html>
