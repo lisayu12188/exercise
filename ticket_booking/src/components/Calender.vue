@@ -9,7 +9,7 @@
             <li class="date-item" :class="{current: isCurrentO}" @click="oneway">
               <span class="date-hint">去程</span>
               <br>
-              <label class="date-label">{{selMonth}}月{{selDate}}日</label>
+              <label class="date-label">{{monthGo}}月{{dateGo}}日</label>
               <span class="weekday">{{selDayGo}}</span>
             </li>
             <li class="date-item" :class="{current: isCurrentR}"  @click="roundway">
@@ -17,7 +17,7 @@
               <div v-if="showDate">
                 <span class="date-hint">返程</span>
                 <br>
-                <label class="date-label">{{selMonth}}月{{selDate+1}}日</label>
+                <label class="date-label">{{monthBack}}月{{dateBack}}日</label>
                 <span class="weekday">{{selDayBack}}</span>
               </div>
 
@@ -25,11 +25,11 @@
           </ul>
           <!--去程日期表-->
           <div v-if="isOneway">
-            <date-list :selMonth = "selMonth" :selYear = "selYear" :selDate = "selDate"/>
+            <date-list @input="changeDate"/>
           </div>
           <!--返程日期表-->
           <div v-if="isRoundway">
-            <date-list :selMonth = "selMonth" :selYear = "selYear" :selDate = "selDate" />
+            <date-list  @input="changeDate"/>
           </div>
 
 
@@ -51,7 +51,7 @@
   weekday[4] = "星期四";
   weekday[5] = "星期五";
   weekday[6] = "星期六";
-
+  let selGoDate,selBackDate; //保存去程和返程的日期用于比较大小
   const d = new Date;
   function currentYear() {
         return d.getFullYear()
@@ -72,8 +72,10 @@
     data () {
         return {
           selYear: currentYear(),
-          selMonth: currentMonth(),
-          selDate: currentDate(),
+          monthGo: currentMonth(),
+          dateGo: currentDate(),
+          monthBack: '',
+          dateBack: '',
           goOrBack: '去程',
           isCurrentO: true,
           isCurrentR: false,
@@ -88,13 +90,13 @@
     },
   computed: {
     selDayGo : function () {
-        let myDate = this.selMonth + "/" + this.selDate + "/" + this.selYear;
+        let myDate = this.monthGo + "/" + this.dateGo + "/" + this.selYear;
         let  w= new Date(myDate).getDay();
         return weekday[w];
     },
     selDayBack : function () {
-      let myDate = this.selMonth + "/" + this.selDate + "/" + this.selYear;
-      let w = new Date(myDate).getDay() + 1;
+      let myDate = this.monthBack + "/" + this.dateBack + "/" + this.selYear;
+      let w = new Date(myDate).getDay();
       return weekday[w];
     },
 
@@ -106,7 +108,7 @@ components: {
 //  filters:{
 
 //        toChinese : function (selDayGo) {
-//          let myDate = this.selMonth + "/" + this.selDate + "/" + this.selYear;
+//          let myDate = this.monthGo + "/" + this.dateGo + "/" + this.selYear;
 //          let  w= new Date(myDate).getDay();
 //          return weekday[w];
 //        }
@@ -115,7 +117,7 @@ components: {
     //选择我的'出发' 或 '返程' 日期
       getMyDay: function (index) {
         if (!this.days[index].isPast) {
-          this.selDate = this.days[index].date
+          this.dateGo = this.days[index].date
           clearGo.call(this);
           this.days[index].isSelected = true;
           this.days[index].go = "去程";
@@ -141,6 +143,28 @@ components: {
         this.showDate = true;
         this.isCurrentR = true;
         this.isCurrentO = false;
+
+      },
+      changeDate: function (v) {
+          if(this.isOneway){
+            selGoDate = new Date(v);
+            this.monthGo = selGoDate.getMonth()+1;
+            this.dateGo = selGoDate.getDate();
+          }else if(this.isRoundway){
+            selBackDate = new Date(v);
+            this.monthBack = selBackDate.getMonth()+1;
+            this.dateBack = selBackDate.getDate();
+            console.log(selBackDate,selGoDate);
+              if (selBackDate < selGoDate ){
+                  console.log(" 小与");
+                  this.isRoundway = false;
+                  this.isOneway = true;
+
+              }
+
+          };
+
+
 
       }
 

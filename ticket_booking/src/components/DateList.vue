@@ -10,7 +10,7 @@
       </ul>
       <ul class="date">
         <li v-for="space in spaces">{{space}}</li>
-        <li @click.prevent="getMyDay(index)"  :class="[{pastDate: day.isPast, currentDate: day.isCurrentDate, selected: day.isSelected}]" v-for="(day, index) in days"  >{{day.date}} <small class="dateType">{{day.go}}</small></li>
+        <li @click.prevent="getMyDay(index)"  :class="[{pastDate: day.isPast, currentDate: day.isToday, selected: isSelected}]" v-for="(day, index) in days"  >{{day.date}} <small class="dateType">{{day.go}}</small></li>
       </ul>
     </div>
 </template>
@@ -53,14 +53,18 @@
     })
   };
   export default {
-    props: ['selYear','selMonth','selDate'],
     name: 'calender',
     data () {
         return {
+          selYear: currentYear(),
+          selMonth: currentMonth(),
+          selDate: currentDate(),
           week: ["日","一","二","三","四","五","六"],
           showDateBox: true,
           isActive:'',
           isGrey: true,
+          isSelected: false,
+
         }
     },
   computed: {
@@ -98,11 +102,12 @@
           if (everyday === today) {
             x = true;
           }
+
           days.push({
             date: i,
-            isSelected: false,
+            isSelected: this.selDate ===i,
             isPast: y,
-            isCurrentDate: x,
+            isToday: x,
             go:'',
             back:'',
           })
@@ -117,12 +122,28 @@
     //选择我的'出发' 或 '返程' 日期
       getMyDay: function (index) {
         if (!this.days[index].isPast) {
+
+
+
           this.selDate = this.days[index].date;
-          clearGo.call(this);
-          this.days[index].isSelected = true;
-          this.days[index].go = "去程";
+
+
+
+
+          console.log(this.selDate);
+
+//          clearGo.call(this);
+
+//          this.days[index].isSelected = true;
+          console.log(this.days[index].isSelected );
+
+//          this.days[index].go = "去程";
+//          console.log(this.days);
+
+          var newDate = this.selYear+'/'+this.selMonth+'/'+this.selDate;
+          console.log( newDate);
 //          this.selMonth
-//          this.$emit('change', newDate);
+          this.$emit('input', newDate); //将选择日期传回父组件
         }
       },
 //         单击左箭头，回翻日历，单击右箭头，向后翻日历
@@ -189,7 +210,7 @@
     color: orange;
     text-decoration: underline;
   }
-  .selected {
+ .selected {
     background: yellow;
     background-clip:content-box;
   }
