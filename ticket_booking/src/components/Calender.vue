@@ -27,9 +27,6 @@
   function currentDate () {
     return d.getDate()
   }
-  function currentDay () {
-    return d.getDay()
-  }
   // 获取每月的最后一天
   function getLastDay (year,month) {
     let new_year = year;
@@ -43,12 +40,12 @@
   }
   export default {
     name: 'calender',
-    props: ['value','limit','isOneway','isRoundway'],
+    props: ['value','limit'],
     data () {
       return {
-      selYear: currentYear(),
-      selMonth: currentMonth(),
-      time: ( this.value || new Date().getTime() ),
+      selYear: new Date(this.value).getFullYear() || new Date().getFullYear(),
+      selMonth: new Date(this.value).getMonth()+1 || new Date().getMonth()+1,
+      time: Date.parse(this.value),
       week: ["日","一","二","三","四","五","六"],
       }
     },

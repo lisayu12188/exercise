@@ -20,17 +20,18 @@
           <span>去程</span>
           <br/>
           <div>
-            {{goingMonth}}月{{goingDate}}日
-            <small>{{goingDay}}</small>
+            {{goingTime | toChineseDate}}
+            <small>{{goingTime | toWeekday}}</small>
           </div>
         </li>
         <li @click="showBackingSchedule">
           <span>返程</span>
           <br/>
           <div v-if="!showDate"> — — </div>
-          <div v-if="showDate">
-            {{backingMonth}}月{{backingDate}}日
-            <small>{{backingDay}}</small>
+          <div v-if="showDate" class="backingTime">
+            {{backingTime | toChineseDate}}
+            <small>{{backingTime | toWeekday}}</small>
+            <span class="iconDelete" @click.stop="deleteDate"> <b> × </b> </span>
           </div>
         </li>
       </ul>
@@ -55,11 +56,8 @@
           </div>
         </li>
       </ul>
-      <div v-if="showGoSchedule" :style="{height:activeHeight + 'px'}" class="scheduleWrapper">
-        <schedule :isOneway="isOneway" v-model="goingTime" :goOrBack="goOrBack" @input="changeDate"/>
-      </div>
-      <div v-if="showBackSchedule" :style="{height:activeHeight + 'px'}" class="scheduleWrapper">
-        <schedule :isRoundway="isRoundway" :goingTime="goingTime" :goOrBack="goOrBack" @input="changeDate"/>
+      <div v-if="showSchedule" :style="{height:activeHeight + 'px'}" class="scheduleWrapper">
+        <schedule :backway="roundway" :goingTime="goingTime" :backingTime="backingTime" :back="goOrBack" @input="changeDate"/>
       </div>
       <a class="search" @click="search"> 搜 索 </a>
     </div>
@@ -71,8 +69,27 @@
 </template>
 
 <script>
+import Vue from 'vue'
 import Schedule from './Schedule.vue';
 const cities=['北京','上海'];
+//定义两个全局过滤器toChineseDate，toWeekday
+Vue.filter("toChineseDate", function (date) {
+  var m = new Date(date).getMonth()+1;
+  var d = new Date(date).getDate();
+  return (m+'月'+d+'日');
+},);
+Vue.filter("toWeekday", function (date) {
+  const weekday = new Array(7);
+  weekday[0] = "星期日";
+  weekday[1] = "星期一";
+  weekday[2] = "星期二";
+  weekday[3] = "星期三";
+  weekday[4] = "星期四";
+  weekday[5] = "星期五";
+  weekday[6] = "星期六";
+  let  w= new Date(date).getDay();
+  return weekday[w];
+});
 export default {
   name: 'container',
   data () {
@@ -83,18 +100,10 @@ export default {
       ],
       from: '北京',
       to: '上海',
-      showGoSchedule: false,
-      showBackSchedule: false,
-      goingTime:'',
-      goingDate: new Date().getDate(),
-      goingMonth: new Date().getMonth() + 1,
-      goingDay: '',
-      backingTime:'',
-      backingDate: '',
-      backingMonth: '',
-      backingDay: '',
-      isOneway:true,
-      isRoundway: false,
+      showSchedule: false,
+      goingTime: this.goingTime || new Date(),
+      backingTime: this.backingTime || '',
+      roundway: false,
       goOrBack: '去程',
       showDate: false,
       getResult: false,
@@ -120,38 +129,40 @@ export default {
       }
     },
     showGoingSchedule: function () {
-      this.showGoSchedule = true;
+      this.roundway = false;
+      this.showSchedule = true;
       this.goOrBack = '去程';
       this.activeHeight = window.screen.height;
     },
     showBackingSchedule: function () {
-      this.showBackSchedule = true;
-      this.isRoundway = true;
+      if (!this.showDate) {
+        this.backingTime = '';
+      }
+      this.roundway = true;
+      this.showSchedule = true;
       this.showDate = true;
       this.goOrBack = '返程';
       this.activeHeight = window.screen.height;
+      if(this.backingTime){
+        this.showDate = true;
+      }
+      if ( Date.parse(this.goingTime) < Date.parse(this.backingTime) ) {
+        this.backingTime ='' ;
+      }
+
     },
-    changeDate: function (myGoingTime,myGoingDay,myBackingTime,myBackingDay) {
+    changeDate: function (myGoingTime,myBackingTime) {
       if (myGoingTime) {
         this.goingTime = myGoingTime;
-        console.log('hello go time'+this.goingTime);
-        this.goingMonth = myGoingTime.getMonth() + 1;
-        this.goingDate = myGoingTime.getDate();
-        this.goingDay = myGoingDay;
       };
       if (myBackingTime) {
-        this.myBackingTime = myBackingTime;
-        this.backingMonth = myBackingTime.getMonth() + 1;
-        this.backingDate = myBackingTime.getDate();
-        this.backingDay = myBackingDay;
+        this.showDate = true;
+        this.backingTime = myBackingTime;
       }else {
         this.showDate = false;
       };
-      this.showGoSchedule = false;
-      this.showBackSchedule = false;
+      this.showSchedule = false;
     },
-//    getRoundway: function () {
-//    },
     search: function () {
       this.getResult = true;
     },
@@ -162,6 +173,10 @@ export default {
       var copyFrom = this.from;
       this.from = this.to;
       this.to = copyFrom;
+    },
+    deleteDate: function () {
+        this.showDate = false;
+        this.backingTime = '';
     }
   },
 }
@@ -198,6 +213,7 @@ export default {
     margin: 1.5%;
     border-radius: 3px;
     border: 1px solid transparent;
+    box-shadow: 2px 10px 20px;
   }
   #main > ul {
     margin:  0 auto;
@@ -268,5 +284,22 @@ export default {
     left: 0;
     width: 100%;
     background: rgba(0,0,0,0.5);
+  }
+  .backingTime{
+    position: relative;
+  }
+  .iconDelete {
+    position: absolute;
+    top: 16%;
+    right: -20px;
+    background: #cacaca;
+    color: #fff;
+    font-size: 20px;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 20px;
   }
 </style>
