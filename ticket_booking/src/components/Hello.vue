@@ -1,37 +1,36 @@
 <template>
   <div id="container">
     <ul class="title">
-      <li></li>
+      <li @click="selType(index)" :class="[{current: item.isCurrent}]" v-for="(item, index) in typeItems">{{item.type}}</li>
     </ul>
-    <div id="main">
+    <div id="main" v-if="!getResult">
       <ul>
         <li>
-          <b>{{}}</b>
-          <div v-show="false">
-            from
-        </div>
+          <b>{{from}}</b>
         </li>
-        <li class="exchangePic"><img  src="../assets/exchange.png" width="70px" alt=""></li>
+        <li class="exchangePic">
+          <img  src="../assets/exchange.png" width="70px" alt="" @click="exchangeCity">
+        </li>
         <li>
-          <b>{{}}</b>
-          <div v-show="false">
-            to
-         </div>
+          <b>{{to}}</b>
         </li>
       </ul>
       <ul>
-        <li >
-          <span >去程</span>
+        <li @click="showGoingSchedule" >
+          <span>去程</span>
           <br/>
           <div>
-            {{}} <small>{{}}</small>
+            {{goingMonth}}月{{goingDate}}日
+            <small>{{goingDay}}</small>
           </div>
         </li>
-        <li>
+        <li @click="showBackingSchedule">
           <span>返程</span>
           <br/>
-          <div>
-            {{}} <small>{{}}</small>
+          <div v-if="!showDate"> — — </div>
+          <div v-if="showDate">
+            {{backingMonth}}月{{backingDate}}日
+            <small>{{backingDay}}</small>
           </div>
         </li>
       </ul>
@@ -41,14 +40,14 @@
         </li>
         <li class="rdBox">
           <div>
-            <input type="radio" value="" name="rdChild" id="child">
+            <input type="radio" name="rdChild" id="child">
             <label for="child">
               <span>携带儿童</span>
               <small>2-12岁</small
               ></label>
           </div>
           <div>
-            <input type="radio" value="" name="rdChild" id="baby">
+            <input type="radio" name="rdChild" id="baby">
             <label for="baby">
               <span>携带婴儿</span>
               <small>14天-2岁</small>
@@ -56,66 +55,124 @@
           </div>
         </li>
       </ul>
-      <div v-if="true">
-        <calender ></calender>
+      <div v-if="showGoSchedule" :style="{height:activeHeight + 'px'}" class="scheduleWrapper">
+        <schedule :isOneway="isOneway" v-model="goingTime" :goOrBack="goOrBack" @input="changeDate"/>
       </div>
-      <a class="search"> 搜 索 </a>
+      <div v-if="showBackSchedule" :style="{height:activeHeight + 'px'}" class="scheduleWrapper">
+        <schedule :isRoundway="isRoundway" :goingTime="goingTime" :goOrBack="goOrBack" @input="changeDate"/>
+      </div>
+      <a class="search" @click="search"> 搜 索 </a>
     </div>
-    <div>
-      {{}}
-     <a style="color: yellow" > 返回 </a>
+    <div v-if="getResult">
+      正在查询,请稍后...
+     <a class="btnBack" @click="getBack"> 返回 </a>
     </div>
-    <div  ></div>
   </div>
 </template>
 
 <script>
-import Calender from './Calender.vue'
+import Schedule from './Schedule.vue';
+const cities=['北京','上海'];
 export default {
-  name: 'hello',
-//  data () {
-//    return {
-//      typeItems: [
-//        {type: '单程', isCurrent: 1},
-//        {type: '往返', isCurrent: 0},
-//      ],
-//      currentStart: '北京',
-//      currentDest: '上海',
-//      goORback: '',
-//
-//
-//      btn: 'btn',
-//      isActive: 0,
-//      isShowing: 1,
-//      alert: '',
-//      info: '',
-//      myAnimate: 1,
-//      isAnimate: '',
-//      activeHeight: 0,
-//      myJourney: '',
-//
-//
-//    }
-//  },
-//  methods: {
-//    selGoingDate: function () {
-//        this.showCalender = true;
-//    }
-//
-//  },
+  name: 'container',
+  data () {
+    return {
+      typeItems: [
+        {type: '国内', isCurrent: 1},
+        {type: '国际', isCurrent: 0},
+      ],
+      from: '北京',
+      to: '上海',
+      showGoSchedule: false,
+      showBackSchedule: false,
+      goingTime:'',
+      goingDate: new Date().getDate(),
+      goingMonth: new Date().getMonth() + 1,
+      goingDay: '',
+      backingTime:'',
+      backingDate: '',
+      backingMonth: '',
+      backingDay: '',
+      isOneway:true,
+      isRoundway: false,
+      goOrBack: '去程',
+      showDate: false,
+      getResult: false,
+      showBookingInf: false,
+      activeHeight:0,
+    }
+  },
   components: {
-    Calender
-  }
+    Schedule
+  },
+  methods: {
+    selType: function (index) {
+      this.typeItems.forEach(function (item) {
+        if (item.isCurrent === 1) {
+          item.isCurrent = 0;
+        }
+      });
+      this.typeItems[index].isCurrent = 1;
+      if (this.typeItems[index].type === '往返') {
+        this.isRound = 1;
+      }else {
+        this.isRound = 0;
+      }
+    },
+    showGoingSchedule: function () {
+      this.showGoSchedule = true;
+      this.goOrBack = '去程';
+      this.activeHeight = window.screen.height;
+    },
+    showBackingSchedule: function () {
+      this.showBackSchedule = true;
+      this.isRoundway = true;
+      this.showDate = true;
+      this.goOrBack = '返程';
+      this.activeHeight = window.screen.height;
+    },
+    changeDate: function (myGoingTime,myGoingDay,myBackingTime,myBackingDay) {
+      if (myGoingTime) {
+        this.goingTime = myGoingTime;
+        console.log('hello go time'+this.goingTime);
+        this.goingMonth = myGoingTime.getMonth() + 1;
+        this.goingDate = myGoingTime.getDate();
+        this.goingDay = myGoingDay;
+      };
+      if (myBackingTime) {
+        this.myBackingTime = myBackingTime;
+        this.backingMonth = myBackingTime.getMonth() + 1;
+        this.backingDate = myBackingTime.getDate();
+        this.backingDay = myBackingDay;
+      }else {
+        this.showDate = false;
+      };
+      this.showGoSchedule = false;
+      this.showBackSchedule = false;
+    },
+//    getRoundway: function () {
+//    },
+    search: function () {
+      this.getResult = true;
+    },
+    getBack: function () {
+      this.getResult = false;
+    },
+    exchangeCity: function () {
+      var copyFrom = this.from;
+      this.from = this.to;
+      this.to = copyFrom;
+    }
+  },
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
-
   #container{
     width: 100%;
-    padding-bottom: 50px;
+    padding-bottom: 30px;
+    border: 1px solid transparent;
   }
   #container .title{
     width: 146px;
@@ -141,7 +198,6 @@ export default {
     margin: 1.5%;
     border-radius: 3px;
     border: 1px solid transparent;
-
   }
   #main > ul {
     margin:  0 auto;
@@ -155,21 +211,23 @@ export default {
     width: 45%;
     text-align: left;
   }
+  #main > ul > li:first-child {
+    text-align: left;
+  }
 
   #main > ul > li:last-child {
     text-align: right;
-  }
-  #main > ul > li:first-child {
-    text-align: left;
   }
   #main a.search{
     background: orange;
     color:white;
     display: block;
     text-align: center;
-    padding: 10px;
+    padding: 5px;
     margin: 20px 0;
     border-radius: 3px;
+    font-weight:bold;
+    font-size: 24px;
   }
   .rdBox{
     flex-wrap: wrap;
@@ -192,50 +250,6 @@ export default {
     width: 55%;
 
   }
-  #date {
-    width: 97%;
-    margin: 1.5%;
-    padding: 20px;
-    border-radius: 3px;
-    background: #fff;
-    box-shadow: 1px 1px 40px #000;
-  }
-  #date .week,
-  #date .date {
-    display: flex;
-    /*justify-content: space-around;*/
-    flex-wrap: wrap;
-    font-size: 20px;
-  }
-  #date .week > li,
-  #date .date > li{
-    width: 14%;
-    margin-bottom: 10px;
-    /*flex-grow: 1;*/
-    padding: 0 2.5%;
-
-  }
-  .currentDate {
-    color: orange;
-    text-decoration: underline;
-  }
-  .selected {
-    background: yellow;
-    background-clip:content-box;
-  }
-  .pastDate{
-    color: #bbb;
-  }
-  .btn{
-
-    display: inline-block;
-    font-size: 24px;
-    width: 20px;
-    color: #bbb;
-  }
-  .btnActive{
-    color: #3C9CCE;
-  }
   #main > ul li.exchangePic{
     text-align: center;
     height : 40px;
@@ -244,38 +258,15 @@ export default {
   #main>ul, .search {
     font-size: 20px;
   }
-  .alertText {
-    color: red;
+  .btnBack {
+    color:orange;
+    text-decoration: underline;
   }
-
-  @keyframes myAnimate{
-    0%   {margin-top: 0 }
-    25%  {margin-top: -10px}
-    50%  {margin-top: 0}
-    100% {margin-top: 10px}
-  }
-  .alertAnimate {
-    animation-name: myAnimate;
-    animation-duration: 1s;
-  }
-  .finishedBtn{
-    position:absolute;
-    top: 5%;
-    right: 5%;
-    color: #00BCD4;
-    font-size: 20px;
-    border-bottom: 1px solid #00BCD4;
-  }
-  .cld-wrapper{
+  .scheduleWrapper {
     position: fixed;
     top: 0;
     left: 0;
-    width:100%;
+    width: 100%;
     background: rgba(0,0,0,0.5);
   }
-  .dateType {
-    font-size: 12px;
-  }
-
-
 </style>

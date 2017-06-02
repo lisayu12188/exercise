@@ -1,275 +1,175 @@
 <template>
-  <div class="cld-wrapper" id="calender" v-if="closeCalender" >
-        <div id="date">
-          <a class="finishedBtn" @click="close">完成</a>
-          <div>
-            <h2>选择{{goOrBack}}日期</h2>
-          </div>
-          <ul class="search-date">
-            <li class="date-item" :class="{current: isCurrentO}" @click="oneway">
-              <span class="date-hint">去程</span>
-              <br>
-              <label class="date-label">{{monthGo}}月{{dateGo}}日</label>
-              <span class="weekday">{{selDayGo}}</span>
-            </li>
-            <li class="date-item" :class="{current: isCurrentR}"  @click="roundway">
-              <div class="date-tip" v-if="showTip" >选择返程</div>
-              <div v-if="showDate">
-                <span class="date-hint">返程</span>
-                <br>
-                <label class="date-label">{{monthBack}}月{{dateBack}}日</label>
-                <span class="weekday">{{selDayBack}}</span>
-              </div>
-
-            </li>
-          </ul>
-          <!--去程日期表-->
-          <div v-if="isOneway">
-            <date-list @input="changeDate"/>
-          </div>
-          <!--返程日期表-->
-          <div v-if="isRoundway">
-            <date-list  @input="changeDate"/>
-          </div>
-
-
-
-
-
-        </div>
-      </div>
+  <div id="date-box">
+    <h2>
+      <b @click="pre" class="pre">&lt;</b>
+      {{selYear}}年{{selMonth}}月
+      <b @click="next">&gt;</b>
+    </h2>
+    <ul class="week">
+      <li v-for="day in week">{{day}}</li>
+    </ul>
+    <ul class="date">
+      <li v-for="space in spaces">{{space}}</li>
+      <li @click.prevent="getMyDay(index)"  :class="[{pastDate: day.isDisabled, currentDate: day.isToday, selected: day.isSelected}]" v-for="(day, index) in days"  >{{day.date}}</li>
+    </ul>
+  </div>
 </template>
 
 <script>
-  import dateList from './DateList.vue';
-
-  const weekday = new Array(7);
-  weekday[0] = "星期日";
-  weekday[1] = "星期一";
-  weekday[2] = "星期二";
-  weekday[3] = "星期三";
-  weekday[4] = "星期四";
-  weekday[5] = "星期五";
-  weekday[6] = "星期六";
-  let selGoDate,selBackDate; //保存去程和返程的日期用于比较大小
   const d = new Date;
-  function currentYear() {
-        return d.getFullYear()
-      };
-  function currentMonth () {
-        return d.getMonth()+1
-      };
-  function currentDate () {
-      return d.getDate()
-    };
-  function currentDay () {
-      return d.getDay()
-    };
-
-  export default {
-
-    name: 'calender',
-    data () {
-        return {
-          selYear: currentYear(),
-          monthGo: currentMonth(),
-          dateGo: currentDate(),
-          monthBack: '',
-          dateBack: '',
-          goOrBack: '去程',
-          isCurrentO: true,
-          isCurrentR: false,
-          closeCalender: true,
-          isOneway: true,
-          isRoundway: false,
-          showTip: true,
-          showDate: false,
-
-
-        }
-    },
-  computed: {
-    selDayGo : function () {
-        let myDate = this.monthGo + "/" + this.dateGo + "/" + this.selYear;
-        let  w= new Date(myDate).getDay();
-        return weekday[w];
-    },
-    selDayBack : function () {
-      let myDate = this.monthBack + "/" + this.dateBack + "/" + this.selYear;
-      let w = new Date(myDate).getDay();
-      return weekday[w];
-    },
-
-
-  },
-components: {
-      dateList
-},
-//  filters:{
-
-//        toChinese : function (selDayGo) {
-//          let myDate = this.monthGo + "/" + this.dateGo + "/" + this.selYear;
-//          let  w= new Date(myDate).getDay();
-//          return weekday[w];
-//        }
-//  },
-  methods: {
-    //选择我的'出发' 或 '返程' 日期
-      getMyDay: function (index) {
-        if (!this.days[index].isPast) {
-          this.dateGo = this.days[index].date
-          clearGo.call(this);
-          this.days[index].isSelected = true;
-          this.days[index].go = "去程";
-        }
-      },
-      close: function () {
-          this.closeCalender = false;
-
-      },
-      oneway: function () {
-        this.isRoundway = false;
-        this.isOneway = true;
-        this.goOrBack = '去程';
-        this.isCurrentR = false;
-        this.isCurrentO = true;
-
-      },
-      roundway: function () {
-        this.isOneway = false;
-        this.isRoundway = true;
-        this.goOrBack = '返程';
-        this.showTip = false;
-        this.showDate = true;
-        this.isCurrentR = true;
-        this.isCurrentO = false;
-
-      },
-      changeDate: function (v) {
-          if(this.isOneway){
-            selGoDate = new Date(v);
-            this.monthGo = selGoDate.getMonth()+1;
-            this.dateGo = selGoDate.getDate();
-          }else if(this.isRoundway){
-            selBackDate = new Date(v);
-            this.monthBack = selBackDate.getMonth()+1;
-            this.dateBack = selBackDate.getDate();
-            console.log(selBackDate,selGoDate);
-              if (selBackDate < selGoDate ){
-                  console.log(" 小与");
-                  this.isRoundway = false;
-                  this.isOneway = true;
-
-              }
-
-          };
-
-
-
-      }
-
+  let len_days;
+  function currentYear () {
+    return d.getFullYear ()
   }
-
-
+  function currentMonth () {
+    return d.getMonth()+1
+  }
+  function currentDate () {
+    return d.getDate()
+  }
+  function currentDay () {
+    return d.getDay()
+  }
+  // 获取每月的最后一天
+  function getLastDay (year,month) {
+    let new_year = year;
+    let new_month = month++;
+    if (month > 12) {
+      new_month -= 12;
+      new_year++;
+    }
+    let new_date = new Date(new_year,new_month,1); //取当年当月中的第一天
+    return len_days = ( new Date(new_date.getTime() - 1000*60*60*24) ).getDate();//获取当月最后一天日期
+  }
+  export default {
+    name: 'calender',
+    props: ['value','limit','isOneway','isRoundway'],
+    data () {
+      return {
+      selYear: currentYear(),
+      selMonth: currentMonth(),
+      time: ( this.value || new Date().getTime() ),
+      week: ["日","一","二","三","四","五","六"],
+      }
+    },
+    computed: {
+      //每月首行的空格数
+      spaces: function () {
+        //获取当月的第一天日期并将其格式化为日期对象，再转化为星期
+        if (this.selMonth < 10) {
+          this.selMonth = "0" + this.selMonth;
+        }
+        let firstDay = this.selMonth+"/"+"01/"+this.selYear;
+        let d = new Date(firstDay);
+        let w = d.getDay();
+        let spaces = [];
+        for (let i = 1; i <= w; i++) {
+          spaces.push(' ')
+        }
+        return spaces;
+      },
+      //渲染每月的天数
+      days : function () {
+        let days = [];
+        getLastDay(this.selYear,this.selMonth);
+        for (let i = 1; i <= len_days; i++) {
+          let everyday = this.selMonth + "/" + (i) + "/" + this.selYear;
+          everyday = Date.parse(everyday);
+          //从行程表中传入一个属性limit，限制日历可点击区域
+          let disabled = false;
+          if(this.limit){//调用limit属性中的方法
+              disabled = this.limit(new Date(everyday));
+          }
+          let today = currentMonth() + "/" + currentDate() + "/" + currentYear();
+          today = Date.parse(today);
+          days.push({
+            date: i,
+            isSelected: this.time === everyday,
+            isDisabled: disabled,
+            isToday: today === everyday,
+            go:'',
+            back:'',
+            time: everyday
+          });
+        }
+        return days;
+      },
+    },
+    methods: {
+      //选择我的'出发' 或 '返程' 日期
+      getMyDay: function (index) {
+        if (!this.days[index].isDisabled) {
+          let time = this.days[index].time;
+          this.time = time;
+          this.$emit('input', new Date(time)); //将选择日期传回父组件
+        }
+      },
+     //单击左箭头:回翻日历，单击右箭头:向后翻日历
+      pre: function () {
+          this.selMonth -= 1;
+        if (this.selMonth <= 1) {
+          this.selYear -= 1;
+          this.selMonth = 12;
+        }
+      },
+      next: function () {
+        if (this.selMonth < 12) {
+          this.selMonth = parseInt(this.selMonth);
+          this.selMonth += 1;
+        }else if (this.selMonth === 12) {
+          this.selYear += 1;
+          this.selMonth = 1;
+        }
+      },
+    }
   }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
-
- h2{
-   margin: 0;
- }
-
-  #calender{
-    width:100%;
-    padding: 20px;
-    /*margin: 1.5%;*/
-    border-radius: 3px;
-    border: 1px solid transparent;
-
-
+  h2{
+    margin: 0;
   }
-  #calender > ul {
-    position: relative;
-    margin:  0 auto;
+  #date-box .week,
+  #date-box .date {
     display: flex;
-    justify-content: space-between;
-    width: 100%;
-  }
-  #calender > ul > li {
-    border-bottom: 1px solid #aaa;
-    padding: 10px 0;
-    width: 45%;
-    text-align: left;
-  }
-
-  #calender > ul > li:last-child {
-    text-align: right;
-  }
-  #calender > ul > li:first-child {
-    text-align: left;
-  }
-  #calender .search-date {
-    display: flex;
-    justify-content: space-between;
-    background: #fff;
-    border-radius: 3px;
-    padding: 20px;
-    margin: 20px 0;
-
-  }
- #calender .date-item {
-   text-align: left;
-   border-bottom: 2px solid #ddd;
- }
- #calender .date-item .date-hint {
-    font-size: 16px;
- }
- #calender .date-item .date-label {
-   font-size: 20px;
-   font-weight: bold;
- }
- #calender .date-item .weekday {
-   font-size: 14px;
- }
-
-
-  #date {
-    width: 97%;
-    margin: 1.5%;
-    padding: 20px;
-    border-radius: 3px;
-    background: lightseagreen;
-    box-shadow: 1px 1px 40px #000;
-  }
-
-  .finishedBtn{
-    position:absolute;
-    /*top: 18%;*/
-    right: 10%;
-    color: orange;
+    flex-wrap: wrap;
     font-size: 20px;
-    border-bottom: 1px solid orange;
   }
-  .cld-wrapper{
-    position: fixed;
-    top: 0;
-    left: 0;
-    width:100%;
-    background: rgba(0,0,0,0.5);
+  #date-box .week > li,
+  #date-box .date > li{
+    position: relative;
+    width: 14%;
+    margin-bottom: 10px;
+    padding: 0 2.5%;
   }
- .date-tip {
-   color: #bbb;
-   font-size: 20px;
-   margin-top: 15px;
- }
- #calender .date-item.current {
-    border-bottom-color: lightseagreen;
+  .currentDate {
+    color: orange;
+    text-decoration: underline;
   }
-
-
-
-
+  .selected {
+    background: yellow;
+    border-radius: 3px;
+    box-shadow: 1px 1px 10px #000;
+  }
+  .pastDate{
+    color: #bbb;
+  }
+  .btn{
+    display: inline-block;
+    font-size: 24px;
+    width: 20px;
+    color: #bbb;
+  }
+  .btnActive{
+    color: #3C9CCE;
+  }
+  .dateType {
+    position: absolute;
+    bottom:0;
+    right:0;
+    font-size: 12px;
+    color: #000;
+    background: #FF9800;
+  }
 </style>
