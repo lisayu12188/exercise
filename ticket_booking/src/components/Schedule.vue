@@ -37,7 +37,6 @@
 
 <script>
   import Calender from './Calender.vue';
-  let goingTime = this.goingTime || new Date();
   //如果去程日期大于返程日期，跳回去程日历表
   function compareDate () {
     if (Date.parse(this.backingTimeDate) < Date.parse(this.goingTimeDate)){
@@ -47,18 +46,18 @@
       this.backingTimeDate = '';
       this.showTip = true;
       this.isRoundway = false;
-      this.goOrBack = '去程';
+//      this.goOrBack = '去程';
     }
   };
   export default {
     name: 'calender',
-    props: ['backway','back','goingTime','backingTime'],
+    props: ['backway','goingTime','backingTime'],
     data () {
       return {
         isRoundway: this.backway || false,
         goingTimeDate: this.goingTime || new Date(),
         backingTimeDate: this.backingTime || '',
-        goOrBack: this.back || '去程',
+        goOrBack: this.backway ? '返程' : '去程',
         closeCalender: true,
         showTip: String(this.backingTime) === '',
       }

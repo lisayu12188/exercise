@@ -57,7 +57,7 @@
         </li>
       </ul>
       <div v-if="showSchedule" :style="{height:activeHeight + 'px'}" class="scheduleWrapper">
-        <schedule :backway="roundway" :goingTime="goingTime" :backingTime="backingTime" :back="goOrBack" @input="changeDate"/>
+        <schedule :backway="roundway" :goingTime="goingTime" :backingTime="backingTime" @input="changeDate"/>
       </div>
       <a class="search" @click="search"> 搜 索 </a>
     </div>
@@ -104,7 +104,7 @@ export default {
       goingTime: this.goingTime || new Date(),
       backingTime: this.backingTime || '',
       roundway: false,
-      goOrBack: '去程',
+//      goOrBack: '去程',
       showDate: false,
       getResult: false,
       showBookingInf: false,
@@ -131,7 +131,7 @@ export default {
     showGoingSchedule: function () {
       this.roundway = false;
       this.showSchedule = true;
-      this.goOrBack = '去程';
+//      this.goOrBack = '去程';
       this.activeHeight = window.screen.height;
     },
     showBackingSchedule: function () {
@@ -141,15 +141,14 @@ export default {
       this.roundway = true;
       this.showSchedule = true;
       this.showDate = true;
-      this.goOrBack = '返程';
+//      this.goOrBack = '返程';
       this.activeHeight = window.screen.height;
       if(this.backingTime){
         this.showDate = true;
       }
-      if ( Date.parse(this.goingTime) < Date.parse(this.backingTime) ) {
+      if ( Date.parse(this.goingTime) > Date.parse(this.backingTime) ) {
         this.backingTime ='' ;
       }
-
     },
     changeDate: function (myGoingTime,myBackingTime) {
       if (myGoingTime) {
