@@ -1,0 +1,123 @@
+body{
+  background: #ddd;
+}
+#section {
+  width: 85%;
+  margin: 20px auto;
+}
+#section>div{
+  background: #fff;
+}
+#section h2 {
+  font-size: 20px;
+  font-weight: bold;
+  border-bottom: 2px solid green;
+  line-height: 50px;
+  margin-bottom: 20px;
+  color: #2c2c2c;
+  text-align: center;
+  background: #fff;
+  margin-top: 20px;
+}
+#section h2 b {
+  display: inline-block;
+  font-size: 22px;
+  transform: skewx(20deg);
+  color: orange;
+  padding: 0 5px;
+}
+#section h2 a {
+  float: right ;
+  color: darkolivegreen;
+  font-size: 14px;
+  margin-right: 10px;
+  margin-top: 15px;
+}
+#section ul {
+  display: flex;
+  align-content: space-between;
+  flex-wrap: wrap;
+  padding-left: 20px;
+  background: #fff;
+}
+#section ul.photos li {
+  position: relative;
+  width: 23%;
+  margin-bottom: 20px;
+  box-shadow: 2px 2px 10px #000;
+}
+#section ul.photos li a > img {
+  width: 100%;
+}
+
+#section ul.photos li p {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  font-size: 18px;
+  /*z-index: 0;*/
+  display: none;
+}
+#section ul.photos li p b {
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+  margin-top:75px;
+  margin-bottom: 10px;
+  /*line-height: 204px;*/
+}
+#section ul.photos li p i,#section ul.photos li p time{
+  font-size: 12px;
+  display: block;
+  text-align: center;
+  line-height: 15px;
+
+}
+#section ul.photos li:not(:nth-child(4)) {
+  margin-right: 20px;
+}
+/*header .nav>li>a:focus, header .nav>li>a:hover {
+  background: none;
+}*/
+#new-photos ul.photos {
+  flex-wrap: nowrap;
+  overflow: hidden;
+}
+
+#new-photos ul.photos li a > img{
+  width:277px;
+}
+#new-photos {
+  overflow: hidden;
+}
+
+#new-photos ul.photos li{
+  margin-right: 19px;
+  /*overflow: hidden;*/
+}
+#new-photos .photos-wrapper {
+  margin: 0 20px;
+  overflow: hidden;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

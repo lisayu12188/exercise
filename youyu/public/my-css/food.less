@@ -1,0 +1,190 @@
+* {
+  box-sizing: border-box;
+}
+/*1.页面顶部：导航条*/
+header .search{
+  border-bottom: none;
+}
+header .input-wrapper{
+  display: none;
+}
+header .search-wrapper{
+  padding-bottom: 0;
+}
+/*搜索框*/
+#food-search {
+  position: absolute;
+  top: 280px;
+  width: 100%;
+  margin: 0 auto;
+  color: #fff;
+  >p{
+    width: 480px;
+    font-size: 30px;
+    text-align: center;
+    margin: 0 auto 20px;
+    background-color: rgba(255,255,255,0.4);
+    border: 1px solid transparent;
+    text-shadow:1px 1px 0 #666;
+
+  }
+  label{
+    display: none;
+  }
+
+  form{
+    div {
+      width: 500px;
+      padding-right: 39px;
+      background: #fff url(../images/sprite_icon.png) no-repeat 419px -88px;
+      border: 2px solid green;
+      border-radius: 3px;
+      margin: auto;
+
+      input {
+        width: 450px;
+        height: 36px;
+        font-size: 14px;
+        outline: none;
+        border:none;
+        padding-left: 10px;
+      }
+    }
+    div:hover{
+      background-position: 469px -88px;
+      cursor: pointer;
+    }
+
+  }
+}
+
+/*****3.主体*********/
+section {
+  width: 81.5%;
+  margin:0 auto;
+}
+section .dest{
+  margin:30px auto;
+}
+#dest-month ul,
+#dest-theme ul.title  {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+#dest-month ul{
+  margin:20px auto;
+}
+
+section .dest h2{
+  font-size: 30px;
+  line-height: 30px;
+  text-align: center;
+  color: #2C2C2C;
+  margin-bottom: 10px;
+
+}
+#dest-month ul.title,
+#dest-theme ul.title{
+  /* width: 800px;
+   margin: auto;*/
+  justify-content: center;
+
+}
+section .dest ul.title li{
+  width: 80px;
+}
+section .dest ul.title a {
+  color: #666;
+  border-bottom:2px solid transparent;
+  padding-bottom:5px;
+}
+section .dest ul.title a:hover{
+
+  border-bottom:1px solid #2c2c2c;
+}
+section .dest ul li b {
+  display: inline-block;
+}
+section .dest ul.title li.current a:hover{
+  border-bottom:2px solid transparent;
+  cursor:default;
+}
+
+section .dest .city li p{
+  position: absolute;
+  top:50%;
+  margin-top: -13px;
+  width: 100%;
+  text-align: center;
+
+  color: #fff;
+  font-size: 26px;
+}
+
+/*3.1主题游推荐*/
+#dest-theme ul{
+  margin:20px auto;
+}
+#dest-theme ul.city li{
+  float: left;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+#dest-theme ul.city li.right{
+  float: right;
+}
+
+#dest-theme ul.city li.no-margin{
+  margin-right: 0px;
+}
+#dest-theme ul.city li {
+  position: relative;
+  overflow: hidden;
+
+}
+#dest-theme ul.city li a{
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+
+}
+
+section ul.city li:hover img{
+  transform: scale(1.3);
+  transition: transform 1s;
+  opacity: 0.8;
+}
+
+#dest-theme .current{
+  color:green;
+  border-bottom: 2px solid green;
+}
+
+/*3.2旅行者之选*/
+
+#dest-advisor ul{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+#dest-advisor ul li{
+  width: 23.6%;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+#dest-advisor>p{
+  text-align: center;
+  color:green;
+  margin-bottom: 20px;
+}
+#dest-advisor>p>span{
+  border-bottom: 1px solid green;
+  padding-bottom: 5px;
+}
+

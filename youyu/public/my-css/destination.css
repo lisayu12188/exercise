@@ -1,0 +1,228 @@
+
+
+header .search-wrapper.fixed{
+  position: fixed;
+  top: 0;
+  z-index: 2;
+  width: 100%;
+}
+
+
+header .search .nav a{
+  line-height: 30px;
+}
+/***2.搜索框***/
+#input-wrapper{
+  height: 300px;
+  background: url(../images/bg_01.jpg);
+  background-size: cover;
+  border-top: 1px solid green;
+  
+  
+}
+#input-wrapper .input-box {
+  margin: 130px 0 0 130px ;
+}
+#input-wrapper .input-box label{
+  display: block;
+  color:rgb(253, 224, 64);
+  font-size: 24px;
+  margin-bottom: 10px;
+  font-style: italic;
+  text-shadow: 3px 3px 10px #fff;
+}
+
+#input-wrapper .input-box input{
+  width:400px;
+  height: 32px;
+  font-size: 18px;
+  border:2px solid #fff;
+  border-radius: 3px;
+  padding-left: 10px;
+  opacity: 0.8;
+  outline: none;
+}
+#input-wrapper .input-box button{
+  width: 100px;
+  height: 40px;
+  font-size: 20px;
+  border:none;
+  border-radius: 6px;
+  color: #fff;
+  cursor: pointer;
+  background-image: linear-gradient(top,#515151,#2C2C2C);
+  background-image: -webkit-linear-gradient(top,#515151,#2C2C2C);
+  background-image: -o-linear-gradient(top,#515151,#2C2C2C);
+  background-image: -ms-linear-gradient(top,#515151,#2C2C2C);
+   background-image: -moz-gradient(top,#515151,#2C2C2C);
+
+}
+
+#slider-box p.slider-text{
+  position: absolute;
+  top:45%;
+  text-align: center;
+  font-size: 20px;
+  color: #fff;
+  font-weight: 500;
+}
+
+
+/*****3.主体*********/
+/***3.1当季目的地推荐***/
+
+section {
+  width: 81.5%;
+  margin:0 auto;
+}
+section .dest{
+  margin:30px auto;
+}
+#dest-month ul,
+#dest-theme ul.title  {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+#dest-month ul{
+  margin:20px auto;
+}
+
+ section .dest h2{
+  font-size: 30px;
+  line-height: 30px;
+  text-align: center;
+  color: #2C2C2C;
+  margin-bottom: 10px;
+
+}
+#dest-month ul.title,
+#dest-theme ul.title{
+ /* width: 800px;
+  margin: auto;*/
+  justify-content: center;
+
+}
+section .dest ul.title li{
+  width: 60px;
+}
+section .dest ul.title a {
+  color: #666;
+  border-bottom:2px solid transparent;
+  padding-bottom:5px;
+}
+section .dest ul.title a:hover{
+
+  border-bottom:1px solid #2c2c2c;
+}
+section .dest ul li b {
+  display: inline-block;
+}
+section .dest ul.title li.current a:hover{
+  border-bottom:2px solid transparent;
+  cursor:default;
+}
+section .dest ul li.current b {
+  width: 20px;
+  height: 20px;
+  background: orange;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 20px;
+  margin-right: 2px;
+}
+
+ #dest-month .city li{
+  width: 24%;
+  margin-bottom: 20px;
+  position: relative;
+  overflow: hidden;
+ }
+
+
+section .dest .city li p{
+  position: absolute;
+  top:50%;
+  margin-top: -13px;
+  width: 100%;
+  text-align: center;
+
+  color: #fff;
+  font-size: 26px;
+}
+
+/*3.2主题游推荐*/
+#dest-theme ul{
+  margin:20px auto;
+}
+#dest-theme ul.city li{
+  float: left;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+#dest-theme ul.city li.right{
+  float: right;
+}
+
+#dest-theme ul.city li.no-margin{
+  margin-right: 0px;
+}
+#dest-theme ul.city li {
+  position: relative;
+    overflow: hidden;
+
+}
+#dest-theme ul.city li a{
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+
+}
+
+section ul.city li:hover img{
+  transform: scale(1.1);
+  transition: transform 1s;
+  opacity: 0.8;
+}
+
+#dest-theme .current{
+  color:green;
+  border-bottom: 2px solid green;
+}
+
+/*3.3旅行者之选*/
+
+#dest-advisor ul{
+  display: flex;
+  justify-content: space-between;
+}
+#dest-advisor ul li{
+  width: 23.6%;
+  position: relative;
+  overflow: hidden;
+}
+
+#dest-advisor>p{
+  text-align: center;
+  color:green;
+  margin-bottom: 20px;
+}
+#dest-advisor>p>span{
+  border-bottom: 2px solid green;
+  padding-bottom: 5px;
+}
+
+
+
+
+
+
+
+
+
+
+
+

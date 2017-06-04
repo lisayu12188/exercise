@@ -1,0 +1,368 @@
+/***通用样式***/
+i{
+  color:#ddd; 
+  margin:0 5px;
+}
+a {
+  text-decoration: none;
+  display: inline-block;
+  color:#999;
+}
+a:hover{
+  color:#069;
+}
+img{
+  vertical-align: middle;
+}
+body{
+  font-family:"hiragino sans gb", "Microsoft YaHei", "Heiti SC", SimHei, SimSun, sans-serif;
+  background: #ddd;
+  color:#666;
+  font-size: 14px;
+}
+/***引入文字图标*****/
+/*@font face{
+font-family:"my icon font";
+src:url();
+}
+body{
+font-family:"my icon font";
+}
+/***1.页面顶部：导航条+搜索框***/
+header{
+  background: #fff;
+}
+header .page-top h1{
+  margin:0;
+}
+header .page-top{
+  display: flex;
+  justify-content: space-between;
+  width: 1170px;
+  margin:auto;
+  height: 100px;
+  line-height: 50px;
+}
+header page-top.h1{
+  flex-grow: 1;
+
+}
+header .page-top>ul{
+  display: flex;
+
+}
+header .page-top>ul>li a{
+  padding:0 20px;
+}
+header .page-top>ul>li a:hover{
+  color: #2c2c2c;
+}
+
+
+
+#language{
+  display: inline-block;
+}
+#language ul{
+  height: 50px;
+  overflow: hidden;
+
+}
+
+#language:hover ul{
+  min-height:100px;
+  overflow: visible;
+}
+#language:hover ul li{
+  height: 25px;
+}
+header .page-top ul .app a:hover{
+  color:red;
+
+}
+
+header .search-wrapper {
+ background: green;
+
+}
+header .search{
+  width: 81.5%;
+  margin: auto;
+  border:1px solid transparent;
+}
+header .search .nav{
+  display: flex;
+
+  
+
+}
+header .search .nav a{
+  color: #fff;
+  font-size: 16px;
+  width: 80px;
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+
+}
+header .search .nav a:hover{
+  color: orange;
+  text-decoration: underline;
+}
+
+header .search .nav .current a{
+    background: rgba(1, 101, 1, 0.85);
+}
+header .search .nav .current a:hover{
+    color:#fff;
+    text-decoration: none;
+    cursor:default;
+}
+header .search input{
+  width: 400px;
+  height: 30px;
+  padding:3px 5px;
+  font-size: 14px;
+  border:none;
+  outline: none;
+}
+header .search button{
+
+  font-size: 18px;
+  font-weight: bold;
+  width: 100px;
+  text-align: center;
+  height: 42px;
+  line-height: 40px;
+  border:none;
+  background:#D0DA20;
+  color: gray;
+  margin-left:-7px;
+  margin-top: -3px;
+  cursor: pointer;
+
+}
+header .input-wrapper{
+  width: 510px;
+  background: #D0DA20;
+  padding:3px;
+  border-radius: 5px;
+}
+header .app{
+  position: relative;
+}
+#two-code{
+  position: absolute;
+  top:50px;
+  left: 20px;
+
+  width: 100px;
+  height:100px;
+  border:1px solid #ddd;
+  background: #ddd;
+  background-size: cover;
+}
+
+/*****4.页面底部********/
+footer{
+  margin-top: 60px;
+  min-height: 100px;
+  color: #666;
+  font-size: 13px;
+  line-height: 1.5em;
+}
+footer p{
+  text-align: center;
+  margin-bottom: 10px;
+
+}
+footer p a{
+  color: #666;
+}
+footer p a:hover{
+  color: #0066FF;
+}
+
+/*****边栏条*******/
+#side-bar a {
+  width: 38px;
+  height: 45px;
+    text-indent:-9999px;
+
+}
+#side-bar{
+  position: fixed;
+  right:3%;
+  top:50%;
+
+}
+#side-bar ul li:nth-child(1) a{
+  background:url(../images/c_icons.png) no-repeat 0 0;
+
+}
+#side-bar ul li:nth-child(2) a{
+  background:url(../images/c_icons.png) no-repeat 0 -50px;
+
+}
+#side-bar ul li:nth-child(3) a{
+  background:url(../images/c_icons.png) no-repeat 0 -100px;
+
+}
+#side-bar ul li:nth-child(4) a{
+  background:url(../images/c_icons.png) no-repeat 0 -250px;
+
+}
+#side-bar ul li:nth-child(5) a{
+  background:url(../images/c_icons.png) no-repeat 0 -200px;
+
+}
+#side-bar ul li:nth-child(6) a{
+  background:url(../images/c_icons.png) no-repeat 0 -150px;
+
+}
+#side-bar ul li:nth-child(1) a:hover{
+  background:url(../images/c_icons.png) no-repeat -38px 0;
+
+}
+#side-bar ul li:nth-child(2) a:hover{
+  background:url(../images/c_icons.png) no-repeat -38px -50px;
+
+}
+#side-bar ul li:nth-child(3) a:hover{
+  background:url(../images/c_icons.png) no-repeat -38px -100px;
+
+}
+#side-bar ul li:nth-child(4) a:hover{
+  background:url(../images/c_icons.png) no-repeat -38px -250px;
+
+}
+#side-bar ul li:nth-child(5) a:hover{
+  background:url(../images/c_icons.png) no-repeat -38px -200px;
+
+}
+#side-bar ul li:nth-child(6) a:hover{
+  background:url(../images/c_icons.png) no-repeat -38px -150px;
+
+}
+
+/*2.主体内容：会员注册*/
+section{
+  background: #ddd;
+  padding:30px;
+  color: #2c2c2c;
+}
+#register-info{
+  width:60%;
+  margin:0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  padding:20px;
+  background: #fff;
+}
+#register-info h3{
+  width: 100%;
+  text-align: center;
+  font-size: 20px;
+  height:40px;
+  line-height: 40px;
+  margin-bottom: 30px;
+  font-weight: 500;
+}
+
+#register-info h3 b{
+    padding-bottom: 5px;
+  border-bottom: 2px solid #2c2c2c;
+}
+#register-info form{
+  width:69%;
+  border-right: 2px dashed #ddd;
+  padding: 0 30px;
+
+}
+#register-info form>div{
+  padding: 6px 0;
+  display: flex;
+  flex-wrap: wrap;
+}
+#register-info form>div label{
+  width: 100%;
+  line-height: 30px;
+}
+#register-info form>div input{
+  width: 90%;
+  height: 30px;
+  outline: none;
+}
+#register-info div.id-code input{
+  width: 30%;
+  margin-top: 10px;
+
+}
+#register-info div.id-code>p{
+  width: 60%;
+  line-height: 36px;
+}
+#register-info form button{
+  background: green;
+  width: 100%;
+  color: #fff;
+  font-weight: bold;
+  font-size: 16px;
+  border:none;
+  border-radius: 5px;
+  padding:10px 0;
+  margin-top: 10px;
+
+}
+
+#register-info form>p{
+  text-align: right;
+  border: 1px solid transparent;
+  margin:20px 0;
+}
+
+#register-info aside{
+  width: 20%;
+ display: flex;
+ flex-wrap: wrap;
+   align-self: center;
+   padding-left: 20px;
+
+}
+
+#register-info a{
+  color: #208dd2;
+}
+
+
+#register-info a:hover{
+  text-decoration: underline;
+}
+#myCanvas{
+  margin: 0 10px;
+}
+#idtxt{
+  line-height: 50px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

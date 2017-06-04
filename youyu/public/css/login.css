@@ -1,0 +1,247 @@
+/***通用样式***/
+i{
+  color:#ddd; 
+  margin:0 5px;
+}
+a {
+  text-decoration: none;
+  display: inline-block;
+  color:#999;
+}
+a:hover{
+  color:#069;
+}
+img{
+  vertical-align: middle;
+}
+body{
+  font-family:"hiragino sans gb", "Microsoft YaHei", "Heiti SC", SimHei, SimSun, sans-serif;
+  background: #ddd;
+  color:#666;
+  font-size: 14px;
+}
+/***引入文字图标*****/
+/*@font face{
+font-family:"my icon font";
+src:url();
+}
+body{
+font-family:"my icon font";
+}
+/***1.页面顶部：导航条+搜索框***/
+header{
+  background: #fff;
+}
+header .page-top h1{
+  margin:0;
+}
+header .page-top{
+  display: flex;
+  justify-content: space-between;
+  width: 1170px;
+  margin:auto;
+  height: 100px;
+  line-height: 50px;
+}
+header page-top.h1{
+  flex-grow: 1;
+
+}
+header .page-top>ul{
+  display: flex;
+
+}
+header .page-top>ul>li a{
+  padding:0 20px;
+}
+header .page-top>ul>li a:hover{
+  color: #2c2c2c;
+}
+
+
+
+#language{
+  display: inline-block;
+}
+#language ul{
+  height: 50px;
+  overflow: hidden;
+
+}
+
+#language:hover ul{
+  min-height:100px;
+  overflow: visible;
+}
+#language:hover ul li{
+  height: 25px;
+}
+header .page-top ul .app a:hover{
+  color:red;
+
+}
+
+header .search-wrapper {
+ background: green;
+ min-height: 125px;
+
+}
+header .search{
+  width: 81.5%;
+  margin: auto;
+  border:1px solid transparent;
+}
+header .search .nav{
+  display: flex;
+
+  
+
+}
+header .search .nav a{
+  color: #fff;
+  font-size: 16px;
+  width: 80px;
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+
+}
+header .search .nav a:hover{
+  color: orange;
+  text-decoration: underline;
+}
+
+header .search .nav .current a{
+    background: rgba(1, 101, 1, 0.85);
+}
+header .search .nav .current a:hover{
+    color:#fff;
+    text-decoration: none;
+    cursor:default;
+}
+header .search input{
+  width: 400px;
+  height: 30px;
+  padding:3px 5px;
+  font-size: 14px;
+  border:none;
+  outline: none;
+}
+header .search button{
+
+  font-size: 18px;
+  font-weight: bold;
+  width: 100px;
+  text-align: center;
+  height: 42px;
+  line-height: 40px;
+  border:none;
+  background:#D0DA20;
+  color: gray;
+  margin-left:-7px;
+  margin-top: -3px;
+  cursor: pointer;
+
+}
+header .input-wrapper{
+  width: 510px;
+  background: #D0DA20;
+  padding:3px;
+  border-radius: 5px;
+}
+header .app{
+  position: relative;
+}
+#two-code{
+  position: absolute;
+  top:50px;
+  left: 20px;
+
+  width: 100px;
+  height:100px;
+  border:1px solid #ddd;
+  background: #ddd;
+  background-size: cover;
+}
+
+/*****4.页面底部********/
+footer{
+  margin-top: 60px;
+  min-height: 100px;
+  color: #666;
+  font-size: 13px;
+  line-height: 1.5em;
+}
+footer p{
+  text-align: center;
+  margin-bottom: 10px;
+
+}
+footer p a{
+  color: #666;
+}
+footer p a:hover{
+  color: #0066FF;
+}
+
+/*****边栏条*******/
+#side-bar a {
+  width: 38px;
+  height: 45px;
+    text-indent:-9999px;
+
+}
+#side-bar{
+  position: fixed;
+  right:3%;
+  top:50%;
+
+}
+#side-bar ul li:nth-child(1) a{
+  background:url(../images/c_icons.png) no-repeat 0 0;
+
+}
+#side-bar ul li:nth-child(2) a{
+  background:url(../images/c_icons.png) no-repeat 0 -50px;
+
+}
+#side-bar ul li:nth-child(3) a{
+  background:url(../images/c_icons.png) no-repeat 0 -100px;
+
+}
+#side-bar ul li:nth-child(4) a{
+  background:url(../images/c_icons.png) no-repeat 0 -250px;
+
+}
+#side-bar ul li:nth-child(5) a{
+  background:url(../images/c_icons.png) no-repeat 0 -200px;
+
+}
+#side-bar ul li:nth-child(6) a{
+  background:url(../images/c_icons.png) no-repeat 0 -150px;
+
+}
+#side-bar ul li:nth-child(1) a:hover{
+  background:url(../images/c_icons.png) no-repeat -38px 0;
+
+}
+#side-bar ul li:nth-child(2) a:hover{
+  background:url(../images/c_icons.png) no-repeat -38px -50px;
+
+}
+#side-bar ul li:nth-child(3) a:hover{
+  background:url(../images/c_icons.png) no-repeat -38px -100px;
+
+}
+#side-bar ul li:nth-child(4) a:hover{
+  background:url(../images/c_icons.png) no-repeat -38px -250px;
+
+}
+#side-bar ul li:nth-child(5) a:hover{
+  background:url(../images/c_icons.png) no-repeat -38px -200px;
+
+}
+#side-bar ul li:nth-child(6) a:hover{
+  background:url(../images/c_icons.png) no-repeat -38px -150px;
+
+}

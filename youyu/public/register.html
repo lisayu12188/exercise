@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh-cn">
+  <meta charset="utf-8">
+  <title>游鱼网-用你的眼睛👀看世界</title>
+  <!--引入视口-->
+  <meta name="viewport" content="width=device-width,initial-scale=1,scalable=no">
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="my-css/reset.css">
+  <link rel="stylesheet" type="text/css" href="my-css/register.css">
+  <link rel="stylesheet" type="text/css" href="my-css/common.css">
+
+</head>
+<body>
+<!--1.页面顶部：导航条+搜索框 -->
+<header>
+  <div class="page-top">
+    <h1><a href="index.html"><img src="images/main-logo.png"></a></h1>
+    <ul>
+      <li>
+        <a data-toggle="modal" data-target="#myModal">登陆</a>
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">用户登录</h4>
+              </div>
+              <div class="modal-body">
+                <form method="post">
+                  <div class="form-group">
+                    <label for="recipient-name" class="control-label">账户名：</label>
+                    <input type="text" name="uname" class="form-control" id="recipient-name">
+                  </div>
+                  <div class="form-group">
+                    <label for="message-text" class="control-label">密码：</label>
+                    <input required type="text" name="upwd" class="form-control" id="message-text">
+                  </div>
+                </form>
+                <div class="other-login">
+                  <a href=""><span id="weibo"></span>微博登陆</a>
+                  <a href=""><span id="weixin"></span>微信登陆</a>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">返回</button>
+                <button type="button" class="btn btn-primary">登录</button>
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- <a href=""id="weibo">微博登陆</a>
+        <a href=""id="weixin">微信登陆</a> -->
+      </li>
+      <li>
+        <i>|</i>
+        <a href="register.html">注册</a>
+        <i>|</i>
+      </li>
+      
+      <li id="language" class="dropdown">
+        <button id="lgg-btn" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <p>请选择语言</p>
+          <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dLabel">
+          <li style="display:block" data-status=1>
+          <p  class="current"><img src="images/CN-flag.gif" width="25px"> CN</p>
+          </li>
+          <li>
+          <p><img src="images/UK-flag.gif" width="25px"> En</p>
+          </li >
+          <li>
+          <p><img src="images/JP-flag.gif" width="25px">  Jan</p>
+          </li>
+          <li>
+          <p><img src="images/SP-flag.gif" width="25px">  Span</p>
+          </li>
+        </ul>
+      </li>
+      <li class="app">
+        <i>|</i>
+        <a data-status="1" style="font-weight:bold;text-decoration: underline;">下载App</a>
+        <p id="two-code" ><img src="images/2-code.jpg" width="100px"></p>
+      </li>
+    </ul>
+  </div>
+  <div class="search-wrapper">
+    <div class="search" id="navbar">
+      <ul class="nav">
+        <li>
+          <a href="index.html">首页</a>
+        </li>
+        <li  >
+          <a href="destination.html">目的地</a>
+        </li>
+        <li>
+          <a href="hotel.html">酒店</a>
+        </li>
+        <li >
+          <a href="">景点</a>
+        </li>
+        <li>
+          <a href="food.html">美食</a>
+        </li>
+        <li>
+          <a href="">游记</a>
+        </li>
+        <li>
+          <a href="">指南</a>
+        </li>
+        <li>
+          <a href="photos.html">摄影</a>
+        </li>
+        <li>
+          <a href="">写点评</a>
+        </li>
+      </ul>
+      <!-- <div class="input-wrapper">
+        <input type="text" name="txtSearch" placeholder="请输入酒店、餐厅、景点名称">
+        <button>查&nbsp;&nbsp;询</button>
+      </div> -->
+    </div>
+  </div>
+</header>
+<!--2.主体内容：会员注册-->
+<section>
+  <div id="register-info">
+    <h3>
+      <b>会员注册</b>
+    </h3>
+    <form method="post">
+      <div>
+        <label>邮箱账号：</label>
+        <input required class="uemail" type="email" name="" placeholder="请输入邮箱账号">
+      </div>
+      <div>
+        <label>昵称：</label>
+        <input required class="uname" type="text" name="" placeholder="3-18位中英文、数字、下划线">
+      </div>
+      <div>
+        <label>设置密码：</label>
+        <input required class="upwd" type="password" name="" placeholder="请输入密码（6-16位数字、字母或字符的组合）">
+      </div>
+      <div>
+        <label>确认密码：</label>
+        <input required class="confirm-upwd" type="password" name="" placeholder="请输入密码（6-16位数字、字母或字符的组合）">
+      </div>
+      <div class="id-code" >
+        <label>验证码：</label>
+        <input name="" class="id-input" type="text" name="" placeholder="请输入验证码">
+        <canvas id="myCanvas" width="100px" height="50px"></canvas>
+        <a href="#" id="idtxt">看不清，换一张</a>
+      </div>
+      <p style="text-align: center">
+        <a  id="reg-btn" style="  background-color: green;
+    color: white; font-size: 18px;border: none; padding:5px 10px;">
+          同意协议并注册®
+        </a>
+      </p>
+
+      <p>
+        已经有账号？<a data-toggle="modal" data-target="#myModal">立即登陆</a>
+      </p>
+    </form>
+    <aside>
+      <h4>注册会员须知：</h4>
+      <p> 注册后。。。。。<p>
+    </aside>
+    </div>
+
+
+
+  </div>
+</section>
+<!--4.页面底部-->
+<footer>
+  <hr>
+  <p>
+    <a href="">关于我们</a>
+    <i>|</i>
+    <a href="">新闻动态</a>
+    <i>|</i>
+    <a href="">工作机会</a>
+    <i>|</i>
+    <a href="">商务合作</a>
+    <i>|</i>
+    <a href="">会员中心</a>
+    <i>|</i>
+    <a href="">业主中心</a>
+    <i>|</i>
+    <a href="">常见问题</a>
+    <i>|</i>
+    <a href="">意见反馈</a>
+    <i>|</i>
+    <a href="">联系我们</a>
+    <i>|</i>
+    <a href="">营业执照</a>
+  </p>
+  <p>&copy; 2017 游鱼网 版权所有。 游鱼网的 <a href="">使用条款</a> 和 <a href=""> 隐私政策</a>
+  <br>
+  *
+  游鱼网不是旅行社，也不是旅游预订服务代理商。我们提供免费、客观、公正的旅游资讯服务。</p>
+  <p>
+  <a href="">京ICP证080678号</a>&nbsp;&nbsp;
+  <a href="">京ICP备09040564号</a>&nbsp;&nbsp;
+  <a href="">京公网安备11010502027214号</a>
+
+  </p>
+</footer>
+<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+<script type="text/javascript" src="js/jquery-1.11.3.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/common.js"></script>
+<script>
+  onload=function(){
+//      随机生成验证码
+      var chars='';
+      function changeCode() {
+
+          var str = 'ABCDEFGHJKLMNPQRSTWXY3456789';
+          var n = str.length;
+          var w = 100;
+          var h = 50;
+          var b = 0;
+          var s = 14;
+          var c = document.getElementById("myCanvas");
+          var ctx = c.getContext("2d");
+
+          function x() {
+              var x = parseInt(Math.random() * w);
+              return x;
+          }
+
+          function y() {
+              var y = parseInt(Math.random() * h);
+              return y;
+          }
+
+
+          //console.log(i);
+          function getChar() {
+              var i1 = parseInt(Math.random() * n);
+              return char= "" + str[i1];
+          }
+
+
+
+          function fontSize() {
+              var fontSize = parseInt((Math.random() * 20) + 12) + "px";
+              return fontSize + " Arial";
+          }
+
+          function getLightColor() {
+              var r = parseInt((Math.random()*256)+120)
+              var g = parseInt((Math.random()*256)+120)
+              var b = parseInt((Math.random()*256)+120)
+              //return {r,g,b}
+              return "rgb(" + r + "," + g + "," + b + ")";
+
+          }
+          function getDarkColor() {
+              var r = parseInt(Math.random()*120)
+              var g = parseInt(Math.random() * 120)
+              var b = parseInt(Math.random() * 120)
+              //return {r,g,b}
+              return "rgb(" + r + "," + g + "," + b + ")";
+
+          }
+
+          function getCircle() {
+              ctx.beginPath();
+              //ctx.fillStyle="#ddd";
+              ctx.arc(x(), y(), 1, 0, 2 * Math.PI);
+              ctx.closePath();
+              ctx.fillStyle = getLightColor();
+              ctx.fill();
+          }
+
+          function getLine() {
+              ctx.beginPath();
+              ctx.moveTo(x(), y());
+              ctx.lineTo(x(), y());
+              ctx.strokeStyle = getDarkColor();
+              ctx.stroke();
+          }
+
+          ctx.clearRect(0,0,w,h);
+
+          function drawChar(){
+              ctx.font = fontSize()
+              //var color = getColor();
+              //var ctx = c.getContext("2d");
+              ctx.fillStyle = getDarkColor();
+              ctx.fillText(getChar(), b+=s, 40);
+          }
+
+          for (var i = 0; i < 5; i++) {
+              drawChar();
+              chars+=char;
+          }
+          //console.log(chars);
+          c.style.background = getLightColor();
+
+          for (var i = 0; i < 100; i++) {
+              getCircle();
+          }
+          for (var i = 0; i < 5; i++) {
+              getLine();
+          }
+      }
+      changeCode();
+      idtxt.onclick=function(e){
+          e.preventDefault();
+          changeCode();
+      }
+      var e=document.querySelector("#register-info .uemail");
+      var n=document.querySelector("#register-info .uname");
+      var p=document.querySelector("#register-info .upwd");
+      var cp=document.querySelector("#register-info .confirm-upwd");
+      var regbtn=document.querySelector("#reg-btn");
+      var code=document.querySelector("#register-info .id-input");
+      console.log(chars);
+      regbtn.onclick=function() {
+          if(code.value!=null){
+              if (code.value === chars ) {
+                  $.ajax({
+                      type: "POST",
+                      url: "/user/register",
+                      data: {uemail: e.value, uname: n.value, upwd: p.value},
+                      success: (result) => {
+                          //console.log(result);
+                          alert(result.msg);
+//                          regbtn.setAttribute("data-toggle","modal");
+//                          regbtn.setAttribute("data-target","#myModal");
+                          setTimeout(function(){
+                              location.href="index.html"
+                          },3000)
+
+
+                      }
+                  });
+              }
+          }
+      };
+
+//      验证用户名，密码,邮箱,验证码的输入
+      function isUname(){
+          var unameReg=/^(\w){3,18}$/;
+          if(!unameReg.test(n.value)){
+              console.log("uname is wrong");
+              $(n).after("<span>*昵称必须是3-18位中英文、数字、下划线</span>");
+              $(n).next().css("color","red").siblings("span").remove();
+
+          }else{
+            $(n).siblings("span").remove()
+          };
+      }
+      function isPwd(){
+          var upwdReg=/^(\w){6,16}$/;
+          if(!upwdReg.test(p.value)){
+              $(p).after("<span>*密码必须是6-16位数字、字母或字符的组合</span>");
+              $(p).next().css("color","red").siblings("span").remove()
+          }else{
+            $(p).siblings("span").remove()
+          }
+      }
+      function isEmail(){
+          var mailReg=/^(\w)+(\.\w+)*@(\w)+((\.\w{2,3}){1,3})$/;
+          if(!mailReg.test(e.value)){
+              $(e).after("<span>*邮箱格式不正确，请重新输入</span>");
+              $(e).next().css("color","red").siblings("span").remove();
+
+          }else{
+            $(e).siblings("span").remove()
+          };
+      }
+      function isCode() {
+          $("#register-info").on("focus","input",function(){
+              this.value="";
+              $(this).css("color","#666");
+          })
+          code.style.color="#666";
+          if(code.value!=chars){
+            $(code).after("<span>*验证码不正确</span>");
+              $(code).next().css("color","red").siblings("span").remove();
+
+          }else{
+            $(code).siblings("span").remove()
+          };
+      }
+      $("#register-info").on("blur","input",function(){
+          if($(this).hasClass("uname")){isUname()};
+          if($(this).hasClass("upwd")){isPwd()};
+          if($(this).hasClass("uemail")){isEmail()};
+          if($(this).hasClass("id-input")){isCode()};
+
+
+      });
+      var pEle=document.createElement("p");
+      $("#register-info .confirm-upwd").blur(function(){
+          if(cp.value!=p.value){
+              pEle.innerHTML="*两次输入密码不一致，请重新输入！";
+              pEle.style.color="red";
+              cp.parentElement.appendChild(pEle);
+          }
+      })
+      $("#register-info ").on("blur",".confirm-upwd",function(){
+          if($(this).parent().children("p")) {
+              cp.parentElement.removeChild(pEle);
+          }
+
+      })
+
+
+  }
+</script>
+
+
+</body>
+</html>

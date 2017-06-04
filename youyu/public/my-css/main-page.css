@@ -1,0 +1,544 @@
+/*header{
+  position: fixed;
+  top: 0;
+  z-index: 2;
+  width: 100%;
+}*/
+
+/*header .search-wrapper.fixed{
+  position: fixed;
+  top: 0;
+  z-index: 2;
+  width: 100%;
+}
+
+header .search .nav a{
+  line-height: 30px;
+}*/
+/***2.滑动海报***/
+/*#slider-box{
+  width: 100%;
+  position: relative;
+
+}
+#slider-box ul.slider-pic li{
+  display: none;
+
+}
+#slider-box ul.slider-pic .slider-current {
+  display: block;
+
+}
+#slider-box img{
+  width: 100%;
+}
+#slider-box .page-tag{
+  position: absolute;
+  bottom: 10px;
+  left:50%;
+  display: flex;
+  margin-left: -55px;
+
+}
+#slider-box .page-tag a {
+  width: 10px;
+  height: 10px;
+  border:1px solid #ddd;
+  border-radius: 50%;
+  margin-right: 10px;
+  text-align: center;
+  line-height: 20px;
+  text-indent: -9999px;
+
+}
+#slider-box .page-tag .on a{
+  background: #151312;
+}*/
+/***安迪·安德鲁斯***/
+#saying{
+  position:absolute;
+  width: 500px;
+  top:110px;
+  left: 10%;
+  font-size: 22px;
+  line-height: 32px;
+  color: #fff;
+  text-shadow: 1px 1px #000;
+}
+#saying em{
+  float: right;
+  font-style: italic;
+  margin-top: 10px;
+  font-size: 14px;
+
+}
+
+
+
+
+/*****3.主体内容********/
+/*****3.1.五大洲旅游板块********/
+
+section{
+  width: 80%;
+  margin: 10px auto;
+}
+#continent h2{
+  margin-top: 30px;
+}
+#continent .s-nav{
+  display: flex;
+  justify-content: space-between;
+  margin: 25px 0 20px 0;
+}
+#continent ul.s-nav li{
+  width: 19%;
+  text-align: center;
+
+}
+#continent .s-nav a {
+  width: 100%;
+  font-weight: bold;
+  font-size: 16px;
+  background: #fff;
+  color:#999;
+  border-bottom: 2px solid transparent;
+  height: 40px;
+  line-height: 40px;
+  border-radius: 5px;
+  position: relative;
+
+
+}
+#continent .s-nav a:hover{
+  background: #999;
+  color: #56554e;
+  text-decoration: none;
+}
+#continent .s-nav a.current{
+    color:green;
+    border-bottom: 3px solid green;
+    background: #fff;
+}
+#continent .s-nav a.current:after{
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: -15px;
+    margin-left: -8px;
+    border: solid transparent;
+    border-top-color: green;
+    border-width: 6px 8px;
+
+}
+#continent ul.detail{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content:space-between;
+}
+#continent ul.detail li{
+  width: 32%;
+  margin-bottom: 20px;
+  background:#fff;
+  border:1px solid #ddd;
+  text-align: center;
+  overflow: hidden;
+
+
+}
+#continent img{
+  width: 100%;
+}
+
+#continent ul.detail li .place{
+  font-size: 16px;
+  display: flex;
+  justify-content: space-between;
+  margin:20px 10px;
+}
+#continent ul.detail li .h-p-r{
+   display: flex;
+   justify-content: space-between;
+   margin: 10px;
+   padding:10px 0 0 0;
+   border-top: 1px solid #ddd;
+}
+#continent .country a{
+  color: #2c2c2c;
+  font-weight: bold;
+
+
+
+
+}
+#continent .note a{
+  padding:5px 15px;
+  background: green;
+  color:#fff;
+  border-radius: 5px;
+  font-size: 12px;
+
+
+}
+#continent a:hover{
+  color:orange;
+}
+#continent img:hover,
+#continent .hover
+{
+  opacity: 0.8;
+  /*transform: scaleX(1.3);
+  border:5px solid black;*/
+}
+/***悬停在图片上是的显示效果****/
+#continent .detail .image{
+  position: relative;
+  overflow: hidden;
+}
+#continent .detail .hover-text{
+  position: absolute;
+  width: 100%;
+  left: 0;
+  top: 193px;
+  padding-left: 10px;
+  color: #fff;
+  text-align: left;
+  background: -webkit-linear-gradient(top,rgba(0,0,0,0) 0,rgba(0,0,0,0.4) 25%,rgba(0,0,0,0.9) 100%);
+  background: -o-linear-gradient(top,rgba(0,0,0,0) 0,rgba(0,0,0,0.4) 25%,rgba(0,0,0,0.9) 100%);
+  background: -ms-linear-gradient(top,rgba(0,0,0,0) 0,rgba(0,0,0,0.4) 25%,rgba(0,0,0,0.9) 100%);
+  background: linear-gradient(to bottom,rgba(0,0,0,0) 0,rgba(0,0,0,0.4) 25%,rgba(0,0,0,0.9) 100%);
+  line-height: 25px;
+}
+#continent .detail .hover-text .comment{
+  margin-top: 10px;
+}
+#continent .detail .image .hover-text em{
+  font-style: italic;
+  font-size: 12px;
+}
+
+
+#continent .detail .image:hover .hover-text{
+  left: 0;
+  top:138px;
+  transition: top 1s;
+  -webkit-transition: top 1s;
+  -o-transition: top 1s;
+  -ms-transition: top 1s;
+  -moz-transition: top 1s;
+}
+
+#continent .detail .hover-text img{
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 1px solid #ddd;
+}
+
+#continent .detail .recap ul{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-top:10px;
+
+}
+#continent .detail .recap ul li{
+  width: 25%;
+  border:none;
+  /*height: 20%;*/
+}
+
+#continent .detail .recap .image .cover{
+  position: absolute;
+  top:50%;
+  left: 0;
+  right: 0;
+  margin-top: -18px;
+}
+
+.recap .cover a{
+  color:#fff;
+  border: 1px solid #fff;
+  padding:10px 20px ;
+  font-size: 25px;
+}
+
+/******3.2.人气指南******/
+section h2{
+  text-align: center;
+  font-size: 30px;
+  color:#2c2c2c;
+  height: 50px;
+  background: #fff;
+  line-height: 50px;
+  margin:60px 0 20px 0;
+
+}
+section h2 a{
+  font-size: 16px;
+  color:#069;
+}
+
+#hot-place>ul{
+  display: flex;
+  justify-content: space-between;
+
+}
+#hot-place>ul li:not(:last-child){
+  margin-right: 30px;
+}
+/*#hot-place>ul li>a{
+  position: absolute;
+  top:0;
+  left:0;
+}*/
+#hot-place>ul li img{
+  width: 100%;
+  margin-bottom: 10px;
+}
+#hot-place>ul li{
+  background: #fff;
+  position: relative;
+}
+#hot-place>ul li>div:hover,#hot-place>ul li img:hover{
+  box-shadow: 5px 5px 30px #000;
+  /*transform: translatey(-5px);*/
+}
+#hot-place ul p a{
+  color: #2c2c2c;
+  padding:10px 5px;
+  font-size: 16px;
+}
+#hot-place ul span{
+  display: block;
+  font-size: 12px;
+  padding:0 5px 8px;
+
+
+}
+#hot-place ul li:hover p a{
+  color: #069;
+}
+.rotate{
+  transform: rotateY(180deg);
+  transition: all 1s linear;
+  backface-visibility: hidden;
+}
+#hot-place .desc{
+  position: absolute;
+  width:167px;
+  height: 236px;
+  background: #999;
+  color: #fff; 
+  top:0; 
+  left: 0;
+  z-index: -1;
+  display: none;
+
+}
+/*****3.3精品游记*********/
+#blog>div{
+  display: flex;
+  justify-content: space-between;
+}
+#blog>div>div{
+  width: 23%;
+  background: #fff;
+    border:5px solid transparent;
+
+}
+
+
+#blog>div dl img{
+  width: 100%;
+}
+
+#blog .title a{
+  font-size: 18px;
+  color: #2c2c2c;
+}
+
+#blog dl dd{
+  padding:0 10px;
+  margin:10px 0;
+}
+#blog dl:hover .title a {
+  color: #069;
+  
+}
+#blog dl .title a {
+  width: 100%;
+  height: 35px;
+  line-height: 35px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+#blog dl .title span{
+  display: block;
+  color:#999;
+  font-size: 12px;
+  text-indent: 4px;
+  padding-left:15px;
+
+}
+#blog dl .text{
+  color:#2c2c2c;
+  min-height: 50px;
+}
+#blog dl .author {
+  font-size: 12px;
+  margin-bottom: 10px;
+  height: 20px;
+  line-height: 20px;
+}
+#blog dl .author img{
+  width: 20px;
+  border-radius: 50%;
+  margin-right: 5px;
+  vertical-align: top;
+}
+#blog dl .author a:hover{
+  text-decoration: underline;
+  color:black;
+
+}
+#blog>div>div:hover,
+#blog>div>div.hover {
+  border:4px solid #fff;
+  box-shadow: 2px 2px 30px #000;
+}
+
+
+/****3.4醉美摄影******/
+#photos{
+  margin-bottom: 50px;
+}
+#photos p{
+  padding:20px 30px;
+  background: #fff;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content:center;
+
+}
+#photos p a img{
+  padding: 10px;
+  border: 1px solid transparent; 
+  outline: 1px solid #ddd;
+  background: #fff;
+  margin-right: 20px;
+  margin-bottom: 20px;
+}
+#photos p a:hover img{
+  border:2px solid #999;
+  outline: none;
+  transform: scale(1.1);
+  box-shadow: 0px 0px 8px #000;
+
+
+}
+/****3.5国内外酒店*****/
+
+#hotels>div{
+  margin-bottom: 50px;
+}
+#hotels h3{
+  margin: 20px 0;
+  color: #2c2c2c;
+  font-size: 16px;
+  font-weight: bold;
+
+}
+#hotels p{
+  display: inline-block;
+  margin-bottom: 30px;
+  background: #CDCDCD;
+  
+}
+#hotels p a{
+  text-decoration: underline;
+}
+#hotels ol{
+  display: flex;
+  flex-wrap: wrap;
+  line-height: 20px;
+
+}
+#hotels ol li{
+  width: 16.6%;
+}
+
+
+#hotels ol li span{
+  color:red;
+  vertical-align: super;
+  font-size: 10px;
+  text-shadow: 2px;
+  text-shadow: 1px 1px 1px orange;
+}
+.modal-backdrop{
+  z-index:1;
+}
+#ad-video {
+  position: fixed;
+  /*width:200px;*/
+  /*height: 200px;*/
+  bottom: 0;
+  right: 10px;
+  z-index: 99;
+}
+
+#ad-video .close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: #fff;
+}
+
+/*搜索弹出框，五大洲城市*/
+header .input-wrapper{
+  position: relative;
+}
+#search-place {
+  /*width：500px;*/
+  overflow: hidden;
+  /*position: absolute;*/
+  z-index: 3;
+  background: #fff;
+  display: none;
+  border-radius: 3px;
+
+}
+#search-place .nav {
+  width: 505px;
+  border-bottom : 1px solid #ddd;
+}
+#search-place a{
+  color: #000;
+}
+#search-place .continent .asia {
+  display: block;
+}
+
+#search-place .continent{
+  padding: 0 0 0 20px ;
+}
+#search-place .continent > ul{
+  margin-top: 10px;
+  display: none;
+  overflow: hidden;
+}
+
+#search-place .continent > ul li {
+
+  float: left;
+  margin: 0 20px 15px 0;
+}
+#search-place .color {
+  color: orange;
+  text-decoration: underline;
+}
+
+

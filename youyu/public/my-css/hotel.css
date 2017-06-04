@@ -1,0 +1,375 @@
+* {
+  box-sizing: border-box;
+}
+/*酒店搜索框*/
+#hotel-book {
+  position: absolute;
+  top: 260px;
+  width: 100%;
+  margin: 0 auto;
+  color: #fff;
+}
+#hotel-book p {
+  font-size: 30px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+#hotel-book form {
+  display: flex;
+  justify-content: center;
+}
+#hotel-book label {
+  display: none;
+}
+#hotel-book input {
+  outline: none;
+  height: 40px;
+  border-radius: 5px;
+  border: 2px solid green;
+  margin-right: 3px;
+  margin-left: 20px;
+  padding-left: 10px;
+  color: black;
+}
+#hotel-book button {
+  background: #FE5555;
+  color: #fff;
+  padding: 6px 50px;
+  border: 1px solid #FE5555;
+  margin-right: 20px;
+  font-size: 18px;
+  margin-left: 20px;
+  border-radius: 5px;
+  height:  40px;
+}
+/*#input-box{
+  position:absolute;
+  top:200px;
+  left:138px;
+  width:156px;
+  background: #F3F3F3;
+  ul{
+    color:#fff;
+    position: relative;
+
+  }
+  ul li{
+
+    border-bottom:1px solid #ddd;
+    height:52px;
+    line-height: 50px;
+
+
+
+
+
+  }
+  ul li>a{
+    position: absolute;
+    width:135px;
+    background-image: linear-gradient(top,#999,#1f1d1d);
+    background-image: -webkit-linear-gradient(top,#999,#1f1d1d);
+    background-image: -o-linear-gradient(top,#999,#1f1d1d);
+    padding:0 20px;
+    color:#fff;
+    font-weight: bold;
+    padding-bottom: 1px;
+    opacity: .9;
+    font-size: 14px;
+  }
+  ul li:hover>div{
+    display: block;
+  }
+  ul li.current{
+    background: #fff;
+
+  }
+  ul li>div{
+    position: absolute;
+    top:0;
+    left:130px;
+    background: #fff;
+    border-left:1px solid #ddd;
+    width:470px;
+    height: 300px;
+    z-index: 1;
+    padding:20px;
+    display: none;
+    opacity: 1;
+
+    }
+
+  ul li.current>div{
+    //display: block;
+  }
+
+    >form{
+      padding-left:10px;
+    }
+    label{
+      display: inline-block;
+      width:50px;
+      text-align: right;
+    }
+    input{
+      border-radius: 3px;
+      outline: none;
+      border: 1px solid #ddd;
+      padding: 2px 10px;
+      height:30px;
+      margin-bottom: 12px;
+    }
+    .button{
+      margin-left:55px;
+      button{
+        padding:5px 10px;
+        border: 1px solid #ddd;
+        background: #fff;
+        color: #2c2c2c;
+        border-radius: 3px;
+        font-size: 16px;
+
+      }
+
+    }
+    .hot{
+      margin-left: 70px;
+    }
+
+  }
+  p>a{
+    color:#609EEA;
+
+  }
+
+  p>a:hover{
+    border-bottom: 1px solid #609EEA;
+    line-height: 20px;
+  }
+  */
+/*2.主体*／
+/*2.1酒店类型*/
+#section {
+  width: 85%;
+  margin: 20px auto;
+}
+#section h2 {
+  font-size: 20px;
+  color: #2c2c2c;
+  font-weight: bold;
+  height: 50px;
+  line-height: 50px;
+}
+#section ul.hotel-group {
+  display: flex;
+  justify-content: space-between;
+}
+#section ul.hotel-group li {
+  width: 25%;
+  height: 260px;
+}
+#section ul.hotel-group li:nth-child(1) {
+  background: url("../images/bg-hotel-01.jpg") no-repeat center 0;
+}
+#section ul.hotel-group li:nth-child(2) {
+  background: url("../images/bg-hotel-02.jpg") no-repeat center 0;
+}
+#section ul.hotel-group li:nth-child(3) {
+  background: url("../images/bg-hotel-03.jpg") no-repeat center 0;
+}
+#section ul.hotel-group li:nth-child(4) {
+  background: url("../images/bg-hotel-04.jpg") no-repeat center 0;
+}
+#section ul.hotel-group li:nth-child(5) {
+  background: url("../images/bg-hotel-05.jpg") no-repeat center 0;
+}
+#section ul.hotel-group li:hover {
+  width: 48%;
+  transition: width 1s;
+}
+#section ul.hotel-group li:hover a:hover {
+  background: rgba(0, 0, 0, 0);
+}
+#section ul.hotel-group li:hover a:hover b {
+  display: none;
+}
+#section ul.hotel-group li a {
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.5);
+}
+#section ul.hotel-group li a b {
+  display: inline-block;
+  font-size: 25px;
+  color: #fff;
+  width: 30px;
+  margin-top: 80px;
+}
+#section .hotel-brand-wrapper {
+  background: #fff;
+  margin: 20px auto;
+  /*overflow: auto;*/
+}
+#section .hotel-brand-wrapper .content{
+  overflow: auto;
+}
+#section .hotel-brand-wrapper h2 {
+  position: relative;
+  border: 1px solid #ddd;
+  padding-left: 10px;
+}
+#section .hotel-brand-wrapper h2 .more{
+  position: absolute;
+  top: 0;
+  right: 0;
+  color:#069;
+  font-size: 14px;
+  margin-top: 10px;
+  margin-right: 10px;
+}
+#section .hotel-brand-wrapper h2 a:hover{
+  color:orange;
+}
+#section .hotel-brand-wrapper ul.hotel-brand {
+  display: flex;
+  width: 1963px;
+}
+#section .hotel-brand-wrapper ul.hotel-brand li > a {
+  display: inline-block;
+  width: 153px;
+  height: 142px;
+  padding: 15px;
+  border: 1px solid #ddd;
+}
+#section .hotel-brand-wrapper ul.hotel-brand li > a i {
+  display: inline-block;
+  width: 110px;
+  height: 80px;
+  background: url("../images/hotel-brand.png") no-repeat -448px 0;
+}
+#section .hotel-brand-wrapper ul.hotel-brand li > a p {
+  text-align: center;
+  padding-top: 10px;
+}
+#section .hotel-brand-wrapper ul.hotel-brand li > a:hover {
+  border: 1px solid #FE5555;
+}
+#section .hotel-brand-wrapper ul.hotel-brand li > a:hover i {
+  margin-top: -5px;
+  margin-bottom: 5px;
+  transition: margin .5s;
+}
+#section .hotel-names {
+  background: #fff;
+  border: 1px solid #ddd;
+  padding: 10px 20px;
+  margin-bottom: 20px;
+}
+#section .hotel-names p {
+  display: inline-block;
+  margin-bottom: 30px;
+  color: green;
+}
+#section .hotel-names p a {
+  text-decoration: underline;
+}
+#section .hotel-names ol {
+  display: flex;
+  flex-wrap: wrap;
+  line-height: 20px;
+  display: none;
+  margin-bottom: 10px;
+}
+#section .hotel-names ol li {
+  width: 16.6%;
+}
+#section .hotel-names ol li span {
+  color: red;
+  vertical-align: super;
+  font-size: 10px;
+  text-shadow: 2px;
+  text-shadow: 1px 1px 1px orange;
+}
+#section .hotel-names .abroad {
+  margin-bottom: 20px;
+}
+#section .hotel-names p.down{
+  display: block;
+  height:40px;
+  text-align: center;
+  margin-bottom: 0;
+  color:orange;
+
+}
+#section .hotel-names p.down>span{
+  display:inline-block;
+  font-size:30px;
+  
+}
+#section .hotel-names p.down>span.animate{
+  animation: myMove .6s linear infinite;
+  -webkit-animation: myMove .6s linear infinite;
+  -moz-animation: myMove .6s linear infinite;
+  -o-animation: myMove .6s linear infinite;
+}
+@keyframes myMove{
+  0% {margin:0;}
+  100% {margin-top: -15px;}
+}
+@-webkit-keyframes myMove{
+  0% {margin:0;}
+  100% {margin-top: -15px;}
+}
+@-moz-keyframes myMove{
+  0% {margin:0;}
+  100% {margin-top: -15px;}
+}
+@-o-keyframes myMove{
+  0% {margin:0;}
+  100% {margin-top: -15px;}
+}
+#search-place {
+  /*width：500px;*/
+  overflow: hidden;
+  /*position: absolute;*/
+  z-index: 3;
+  background: #fff;
+  display: none;
+  width: 300px;
+  border-radius: 3px;
+  margin-left: 20px;
+}
+#search-place .nav {
+  padding-left: 5px;
+  border-bottom : 1px solid #ddd;
+  display: flex;
+
+}
+#search-place a{
+  color: #000;
+}
+#search-place .continent .asia {
+  display: block;
+}
+
+#search-place .continent{
+  padding: 0 0 0 20px ;
+}
+#search-place .continent > ul{
+  margin-top: 10px;
+  display: none;
+  overflow: hidden;
+}
+
+#search-place .continent > ul li {
+
+  float: left;
+  margin: 0 20px 15px 0;
+}
+#search-place .color {
+  color: orange;
+  text-decoration: underline;
+}
+
+

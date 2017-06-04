@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>游鱼网-用你的眼睛👀看世界</title>
+  <!--引入视口-->
+  <meta name="viewport" content="width=device-width,initial-scale=1,scalable=no">
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="my-css/reset.css">
+  <link rel="stylesheet" type="text/css" href="my-css/common.css">
+  <link rel="stylesheet" type="text/css" href="my-css/destination.css">
+</head>
+<body>
+<!--1.页面顶部：导航条+搜索框 -->
+<header>
+  <div class="page-top">
+    <h1><a href="index.html"><img src="images/main-logo.png"></a></h1>
+    <ul>
+      <li>
+        <a data-toggle="modal" data-target="#myModal">登陆</a>
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">用户登录</h4>
+              </div>
+              <div class="modal-body">
+                <form method="post">
+                  <div class="form-group">
+                    <label for="recipient-name" class="control-label">账户名：</label>
+                    <input type="text" name="uname" class="form-control" id="recipient-name">
+                  </div>
+                  <div class="form-group">
+                    <label for="message-text" class="control-label">密码：</label>
+                    <input type="text" name="upwd" class="form-control" id="message-text">
+                  </div>
+                </form>
+                <div class="other-login">
+                  <a href=""><span id="weibo"></span>微博登陆</a>
+                  <a href=""><span id="weixin"></span>微信登陆</a>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">返回</button>
+                <button type="button" class="btn btn-primary">登录</button>
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- <a href=""id="weibo">微博登陆</a>
+        <a href=""id="weixin">微信登陆</a> -->
+      </li>
+      <li>
+        <i>|</i>
+        <a href="register.html">注册</a>
+        <i>|</i>
+      </li>
+      
+      <li id="language" class="dropdown">
+        <button id="lgg-btn" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <p>请选择语言</p>
+          <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dLabel">
+          <li style="display:block" data-status=1>
+          <p  class="current"><img src="images/CN-flag.gif" width="25px"> CN</p>
+          </li>
+          <li>
+          <p><img src="images/UK-flag.gif" width="25px"> En</p>
+          </li >
+          <li>
+          <p><img src="images/JP-flag.gif" width="25px">  Jan</p>
+          </li>
+          <li>
+          <p><img src="images/SP-flag.gif" width="25px">  Span</p>
+          </li>
+        </ul>
+      </li>
+      <li class="app">
+        <i>|</i>
+        <a data-status="1" style="font-weight:bold;text-decoration: underline;">下载App</a>
+        <p id="two-code" ><img src="images/2-code.jpg" width="100px"></p>
+      </li>
+    </ul>
+  </div>
+  <div class="search-wrapper">
+    <div class="search" id="navbar">
+      <ul class="nav">
+        <li>
+          <a href="index.html">首页</a>
+        </li>
+        <li  class="current">
+          <a href="destination.html">目的地</a>
+        </li>
+        <li>
+          <a href="hotel.html">酒店</a>
+        </li>
+        <li>
+          <a href="">景点</a>
+        </li>
+        <li>
+          <a href="food.html">美食</a>
+        </li>
+        <li>
+          <a href="">游记</a>
+        </li>
+        <li>
+          <a href="">指南</a>
+        </li>
+        <li>
+          <a href="photos.html">摄影</a>
+        </li>
+        <li>
+          <a href="">写点评</a>
+        </li>
+      </ul>
+      <div class="input-wrapper">
+        <input type="text" name="txtSearch" placeholder="请输入酒店、餐厅、景点名称">
+        <button>查&nbsp;&nbsp;询</button>
+    </div>
+  </div>
+</header>
+<!--2.搜索框 -->
+  <div id="input-wrapper">
+    <div class="input-box">
+        <label>世界那么大，一起去看看...</label>
+        <input type="text" name="txtSearch" placeholder=你想去哪儿？>
+        <button>搜&nbsp;&nbsp;索</button>
+    </div>
+    <!---边栏条---->
+    <div id="side-bar">
+      <ul>
+        <li>
+          <a href="">腾讯微博</a>
+        </li>
+        <li>
+          <a href="">微信</a>
+        </li>
+        <li>
+          <a href="">新浪微博</a>
+        </li>
+        <li>
+          <a href="">QQ空间</a>
+        </li>
+        <li>
+          <a href="#">TOP</a>
+        </li>
+        
+      </ul>
+    </div>
+  </div>
+
+<!--3.主体-->
+<section>
+<!--3.1当季目的地推荐-->
+<div class="dest" id="dest-month">
+  <h2>当季目的地推荐</h2>
+  <ul class="title" id="month">
+    <li>
+      <a href=""><b>1</b>月</a>
+    </li>
+    <li> 
+      <a href=""><b>2</b>月</a>
+    </li>
+    <li class="current">
+      <a href=""><b>3</b>月</a>
+    </li>
+    <li>
+      <a href=""><b>4</b>月</a>
+    </li>
+    <li>
+      <a href=""><b>5</b>月</a>
+    </li>
+    <li>
+      <a href=""><b>6</b>月</a>
+    </li>
+    <li>
+      <a href=""><b>7</b>月</a>
+    </li>
+    <li>
+      <a href=""><b>8</b>月</a>
+    </li>
+    <li>
+      <a href=""><b>9</b>月</a>
+    </li>
+    <li>
+      <a href=""><b>10</b>月</a>
+    </li>
+    <li>
+      <a href=""><b>11</b>月</a>
+    </li>
+    <li>
+      <a href=""><b>12</b>月</a>
+    </li>
+  </ul>
+  <ul class="city">
+    <li>
+      <a href=""><img src="images/bangkok.jpg"></a>
+      <p>曼谷</p>
+    </li>
+    <li>
+      <a href=""><img src="images/bangkok.jpg"></a>
+      <p>曼谷</p>
+    </li>
+    <li>
+      <a href=""><img src="images/bangkok.jpg"></a>
+      <p>曼谷</p>
+    </li>
+    <li>
+      <a href=""><img src="images/bangkok.jpg"></a>
+      <p>曼谷</p>
+    </li>
+    <li>
+      <a href=""><img src="images/bangkok.jpg"></a>
+      <p>曼谷</p>
+    </li>
+    <li>
+      <a href=""><img src="images/bangkok.jpg"></a>
+      <p>曼谷</p>
+    </li>
+    <li>
+      <a href=""><img src="images/bangkok.jpg"></a>
+      <p>曼谷</p>
+    </li>
+    <li>
+      <a href=""><img src="images/bangkok.jpg"></a>
+      <p>曼谷</p>
+    </li>
+  
+  </ul>
+</div>
+<!--3.2主题游推荐-->
+<div class="dest clearfix" id="dest-theme">
+  <h2>主题游推荐</h2>
+  <ul class="title">
+    <li>
+      <a href="" class="current">摄影</a>
+    </li>
+    <li> 
+      <a href="">美食</a>
+    </li>
+    <li>
+      <a href="">购物</a>
+    </li>
+    <li>
+      <a href="">博物馆</a>
+    </li>
+    <li>
+      <a href="">探险</a>
+    </li>    
+  </ul>
+  <ul class="city clearfix">
+    <li>
+      <a href=""><img src="images/hong-kong-large.png" width="764px" height="244px"></a>
+      <p>香港</p>
+    </li>
+    <li class="right no-margin">
+      <a href=""><img src="images/barcelona-large.png" width="377px" height="487px"></a>
+      <p>巴塞罗那</p>
+    </li>
+    <li>
+      <a href=""><img src="images/sanya.png" width="377px"></a>
+      <p>三亚</p>
+    </li>
+    <li>
+      <a href=""><img src="images/paris(1).png" width="377px"></a>
+      <p>巴黎</p>
+    </li>
+    <li>
+      <a href=""><img src="images/xian.png" width="377px"></a>
+      <p>西安</p>
+    </li>
+    
+    <li>
+      <a href=""><img src="images/macau.png" width="377px"></a>
+      <p>澳门</p>
+    </li>
+    
+    <li class="no-margin right">
+      <a href=""><img src="images/xiamen.png" width="377px"></a>
+      <p>厦门</p>
+    </li>
+    </ul>
+  </div>
+</div>
+<!--3.3旅行者之选-->
+<div class="dest clearfix" id="dest-advisor">
+  <h2>主题游推荐</h2>
+  <p><span>数百万用户真实评选，只给你最好的<span></p>
+  <ul class="city">
+    <li>
+      <a href=""><img src="images/best-hotel.png"></a>
+      <p>世界最佳酒店</p>
+    </li>
+    <li>
+      <a href=""><img src="images/best-landscape.png"></a>
+      <p>最佳旅游景点</p>
+    </li>
+    <li>
+      <a href=""><img src="images/best-romantic-hotel.png"></a>
+      <p>最佳旅游城市</p>
+    </li>
+    <li>
+      <a href=""><img src="images/best-travel-city.png"></a>
+      <p>世界最浪漫酒店</p>
+    </li>
+  </ul>
+
+</div>
+</section>
+
+<!--4.页面底部-->
+<footer class="clearfix">
+  <hr>
+  <p>
+    <a href="">关于我们</a>
+    <i>|</i>
+    <a href="">新闻动态</a>
+    <i>|</i>
+    <a href="">工作机会</a>
+    <i>|</i>
+    <a href="">商务合作</a>
+    <i>|</i>
+    <a href="">会员中心</a>
+    <i>|</i>
+    <a href="">业主中心</a>
+    <i>|</i>
+    <a href="">常见问题</a>
+    <i>|</i>
+    <a href="">意见反馈</a>
+    <i>|</i>
+    <a href="">联系我们</a>
+    <i>|</i>
+    <a href="">营业执照</a>
+  </p>
+  <p>&copy; 2017 游鱼网 版权所有。 游鱼网的 <a href="">使用条款</a> 和 <a href=""> 隐私政策</a>
+  <br>
+  *
+  游鱼网不是旅行社，也不是旅游预订服务代理商。我们提供免费、客观、公正的旅游资讯服务。</p>
+  <p>
+  <a href="">京ICP证080678号</a>&nbsp;&nbsp;
+  <a href="">京ICP备09040564号</a>&nbsp;&nbsp;
+  <a href="">京公网安备11010502027214号</a>
+
+  </p>
+</footer>
+<script type="text/javascript" src="js/jquery-1.11.3.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/common.js"></script>
+
+<script type="text/javascript">
+
+// 根据当前月份，自动突出显示月份数字
+$("document").ready(function(){
+  var date=new Date();
+  var month=date.getMonth();
+  $("#month li b").each(function(){
+    var m=$(this).html();
+    if(m=month){
+  $(`#month li:eq(
+    ${m})`).addClass("current").siblings().removeClass("current");
+  }
+  })
+
+});
+
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>

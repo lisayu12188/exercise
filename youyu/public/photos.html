@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh-cn">
+  <meta charset="utf-8">
+  <title>游鱼网-用你的眼睛👀看世界</title>
+  <!--引入视口-->
+  <meta name="viewport" content="width=device-width,initial-scale=1,scalable=no">
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="my-css/reset.css">
+  <link rel="stylesheet" type="text/css" href="my-css/common.css">
+  <link rel="stylesheet" type="text/css" href="my-css/photos.css">
+
+</head>
+<body style="background: #ddd">
+<!--1.页面顶部：导航条+搜索框 -->
+<header>
+  <div class="page-top">
+    <h1><a href="index.html"><img src="images/main-logo.png"></a></h1>
+    <ul>
+      <li>
+        <a data-toggle="modal" data-target="#myModal">登陆</a>
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">用户登录</h4>
+              </div>
+              <div class="modal-body">
+                <form method="post">
+                  <div class="form-group">
+                    <label for="recipient-name" class="control-label">账户名：</label>
+                    <input type="text" name="uname" class="form-control" id="recipient-name">
+                  </div>
+                  <div class="form-group">
+                    <label for="message-text" class="control-label">密码：</label>
+                    <input type="text" name="upwd" class="form-control" id="message-text">
+                  </div>
+                </form>
+                <div class="other-login">
+                  <a href=""><span id="weibo"></span>微博登陆</a>
+                  <a href=""><span id="weixin"></span>微信登陆</a>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">返回</button>
+                <button type="button" class="btn btn-primary">登录</button>
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- <a href=""id="weibo">微博登陆</a>
+        <a href=""id="weixin">微信登陆</a> -->
+      </li>
+      <li>
+        <i>|</i>
+        <a href="register.html">注册</a>
+        <i>|</i>
+      </li>
+      
+      <li id="language" class="dropdown">
+        <button id="lgg-btn" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <p>请选择语言</p>
+          <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dLabel">
+          <li style="display:block" data-status=1>
+          <p  class="current"><img src="images/CN-flag.gif" width="25px"> CN</p>
+          </li>
+          <li>
+          <p><img src="images/UK-flag.gif" width="25px"> En</p>
+          </li >
+          <li>
+          <p><img src="images/JP-flag.gif" width="25px">  Jan</p>
+          </li>
+          <li>
+          <p><img src="images/SP-flag.gif" width="25px">  Span</p>
+          </li>
+        </ul>
+      </li>
+      <li class="app">
+        <i>|</i>
+        <a data-status="1" style="font-weight:bold;text-decoration: underline;">下载App</a>
+        <p id="two-code" ><img src="images/2-code.jpg" width="100px"></p>
+      </li>
+    </ul>
+  </div>
+  <div class="search-wrapper">
+    <div class="search" id="navbar">
+      <ul class="nav">
+        <li>
+          <a href="index.html">首页</a>
+        </li>
+        <li  >
+          <a href="destination.html">目的地</a>
+        </li>
+        <li>
+          <a href="hotel.html">酒店</a>
+        </li>
+        <li >
+          <a href="">景点</a>
+        </li>
+        <li>
+          <a href="food.html">美食</a>
+        </li>
+        <li>
+          <a href="">游记</a>
+        </li>
+        <li>
+          <a href="">指南</a>
+        </li>
+        <li class="current">
+          <a href="photos.html">摄影</a>
+        </li>
+        <li>
+          <a href="">写点评</a>
+        </li>
+      </ul>
+      <!-- <div class="input-wrapper">
+        <input type="text" name="txtSearch" placeholder="请输入酒店、餐厅、景点名称">
+        <button>查&nbsp;&nbsp;询</button>
+    </div> -->
+  </div>
+  </div>
+</header>
+<!--2.滑动海报 -->
+<div id="slider-box">
+  <ul class="slider-pic">
+    <li class="slider-current">
+        <video height="375" muted="muted" preload="auto" autoplay loop="loop" poster="images/poster.png">
+        <source src="res/video2.mp4"  type="video/mp4">
+        <source src="res/video1.webm"  type="video/webm">
+          您的浏览器不支持视频播放。
+        </video>
+    </li>
+    <!--<li>-->
+      <!--<a href=""><img src="images/poster.png"></a>-->
+    <!--</li>-->
+    <!--<li>-->
+      <!--<a href=""><img src="images/poster.png"></a>-->
+    <!--</li>-->
+    <!--<li>-->
+      <!--<a href=""><img src="images/poster.png"></a>-->
+    <!--</li>-->
+    <!--<li>-->
+      <!--<a href=""><img src="images/poster.png"></a>-->
+    <!--</li>-->
+  </ul>
+  <p  class="slider-text" style="
+  position: absolute;
+  top:50%;
+  left:50%;
+  margin-top: -13px;
+  margin-left:-140px;
+  font-size: 26px;
+  color: #fff;
+  text-shadow: 1px 1px #000;
+  ">一个背包，一台相机，说走就走....</p>
+  <!-- <ul class=page-tag>
+    <li class="on"><a href="">1</a></li>
+    <li><a href="">2</a></li>
+    <li><a href="">3</a></li>
+    <li><a href="">4</a></li>
+    <li><a href="">5</a></li>
+  </ul> -->
+  <!---边栏条---->
+  <div id="side-bar">
+    <ul>
+      <li>
+        <a href="">腾讯微博</a>
+      </li>
+      <li>
+        <a href="">微信</a>
+      </li>
+      <li>
+        <a href="">新浪微博</a>
+      </li>
+      <li>
+        <a href="">QQ空间</a>
+      </li>
+      <li>
+        <a href="#">TOP</a>
+      </li>
+    </ul>
+  </div>
+</div>
+<!--3.主体-->
+<section id="section">
+<!--推荐摄影-->
+  <div>
+    <h2>
+      <a href="">更多&gt;</a>
+      推<b>荐</b>摄影
+
+    </h2>
+    <ul class="photos">
+      <li>
+        <a href=""><img src="images/photos-taking1.jpg"> </a>
+        <div class="desc">
+          <p>
+            <b>雾凇传奇</b>
+            <i>from：晓晓</i>
+            <time>2016/10/02</time>
+          </p>
+        </div>
+      </li>
+      <li>
+        <a href=""><img src="images/photos-taking1.jpg"> </a>
+        <div class="desc">
+          <p>
+            <b>雾凇传奇</b>
+            <i>from：晓晓</i>
+            <time>2016/10/02</time>
+          </p>
+        </div>
+      </li>
+      <li>
+        <a href=""><img src="images/photos-taking1.jpg"> </a>
+        <div class="desc">
+          <p>
+            <b>雾凇传奇</b>
+            <i>from：晓晓</i>
+            <time>2016/10/02</time>
+          </p>
+        </div>
+      </li>
+      <li>
+        <a href=""><img src="images/photos-taking1.jpg"> </a>
+        <div class="desc">
+          <p>
+            <b>雾凇传奇</b>
+            <i>from：晓晓</i>
+            <time>2016/10/02</time>
+          </p>
+        </div>
+      </li>
+      <li>
+        <a href=""><img src="images/photos-taking1.jpg"> </a>
+        <div class="desc">
+          <p>
+            <b>雾凇传奇</b>
+            <i>from：晓晓</i>
+            <time>2016/10/02</time>
+          </p>
+        </div>
+      </li>
+      <li>
+        <a href=""><img src="images/photos-taking1.jpg"> </a>
+        <div class="desc">
+          <p>
+            <b>雾凇传奇</b>
+            <i>from：晓晓</i>
+            <time>2016/10/02</time>
+          </p>
+        </div>
+      </li>
+      <li>
+        <a href=""><img src="images/photos-taking1.jpg"> </a>
+        <div class="desc">
+          <p>
+            <b>雾凇传奇</b>
+            <i>from：晓晓</i>
+            <time>2016/10/02</time>
+          </p>
+        </div>
+      </li>
+      <li>
+        <a href=""><img src="images/photos-taking1.jpg"> </a>
+        <div class="desc">
+          <p>
+            <b>雾凇传奇</b>
+            <i>from：晓晓</i>
+            <time>2016/10/02</time>
+          </p>
+        </div>
+      </li>
+      
+
+
+
+    </ul>
+  </div>
+<!--热门摄影-->
+  <div>
+    <h2>
+      <a href="">更多&gt;</a>
+      <b>热</b>门摄影
+
+    </h2>
+    <ul class="photos">
+      <!--<li>-->
+        <!--<a href=""><img src="images/photos-taking1.jpg"> </a>-->
+        <!--<div class="desc">-->
+          <!--<p>-->
+            <!--<b>雾凇传奇</b>-->
+            <!--<i>from：晓晓</i>-->
+            <!--<time>2016/10/02</time>-->
+          <!--</p>-->
+        <!--</div>-->
+      <!--</li>-->
+      <!--<li>-->
+        <!--<a href=""><img src="images/photos-taking1.jpg"> </a>-->
+        <!--<div class="desc">-->
+          <!--<p>-->
+            <!--<b>雾凇传奇</b>-->
+            <!--<i>from：晓晓</i>-->
+            <!--<time>2016/10/02</time>-->
+          <!--</p>-->
+        <!--</div>-->
+      <!--</li>-->
+      <!--<li>-->
+        <!--<a href=""><img src="images/photos-taking1.jpg"> </a>-->
+        <!--<div class="desc">-->
+          <!--<p>-->
+            <!--<b>雾凇传奇</b>-->
+            <!--<i>from：晓晓</i>-->
+            <!--<time>2016/10/02</time>-->
+          <!--</p>-->
+        <!--</div>-->
+      <!--</li>-->
+      <!--<li>-->
+        <!--<a href=""><img src="images/photos-taking1.jpg"> </a>-->
+        <!--<div class="desc">-->
+          <!--<p>-->
+            <!--<b>雾凇传奇</b>-->
+            <!--<i>from：晓晓</i>-->
+            <!--<time>2016/10/02</time>-->
+          <!--</p>-->
+        <!--</div>-->
+      <!--</li>-->
+      <li>
+        <a href=""><img src="images/photos-taking1.jpg"> </a>
+        <div class="desc">
+          <p>
+            <b>雾凇传奇</b>
+            <i>from：晓晓</i>
+            <time>2016/10/02</time>
+          </p>
+        </div>
+      </li>
+      <li>
+        <a href=""><img src="images/photos-taking1.jpg"> </a>
+        <div class="desc">
+          <p>
+            <b>雾凇传奇</b>
+            <i>from：晓晓</i>
+            <time>2016/10/02</time>
+          </p>
+        </div>
+      </li>
+      <li>
+        <a href=""><img src="images/photos-taking1.jpg"> </a>
+        <div class="desc">
+          <p>
+            <b>雾凇传奇</b>
+            <i>from：晓晓</i>
+            <time>2016/10/02</time>
+          </p>
+        </div>
+      </li>
+      <li>
+        <a href=""><img src="images/photos-taking1.jpg"> </a>
+        <div class="desc">
+          <p>
+            <b>雾凇传奇</b>
+            <i>from：晓晓</i>
+            <time>2016/10/02</time>
+          </p>
+        </div>
+      </li>
+
+
+
+
+    </ul>
+  </div>
+<!--最新摄影-->
+  <div id="new-photos">
+    <h2>
+      <a href="">更多&gt;</a>
+      最<b>新</b>摄影
+    </h2>
+    <div class="photos-wrapper">
+      <ul class="photos">
+      <li>
+        <a href=""><img src="images/photos-taking1.jpg"> </a>
+        <div class="desc">
+          <p>
+            <b>雾凇传奇1</b>
+            <i>from：晓晓</i>
+            <time>2016/10/02</time>
+          </p>
+        </div>
+      </li>
+      <li>
+        <a href=""><img src="images/photos-taking8.jpg"> </a>
+        <div class="desc">
+          <p>
+            <b>雾凇传奇2</b>
+            <i>from：晓晓</i>
+            <time>2016/10/02</time>
+          </p>
+        </div>
+      </li>
+      <li>
+        <a href=""><img src="images/photos-taking4.jpg"> </a>
+        <div class="desc">
+          <p>
+            <b>雾凇传奇3</b>
+            <i>from：晓晓</i>
+            <time>2016/10/02</time>
+          </p>
+        </div>
+      </li>
+      <li >
+        <a href=""><img src="images/photos-taking5.jpg"> </a>
+        <div class="desc">
+          <p>
+            <b>雾凇传奇4</b>
+            <i>from：晓晓</i>
+            <time>2016/10/02</time>
+          </p>
+        </div>
+      </li>
+      <li>
+        <a href=""><img src="images/photos-taking1.jpg"> </a>
+        <div class="desc">
+          <p>
+            <b>雾凇传奇5</b>
+            <i>from：晓晓</i>
+            <time>2016/10/02</time>
+          </p>
+        </div>
+      </li>
+      <li>
+        <a href=""><img src="images/photos-taking8.jpg"> </a>
+        <div class="desc">
+          <p>
+            <b>雾凇传奇6</b>
+            <i>from：晓晓</i>
+            <time>2016/10/02</time>
+          </p>
+        </div>
+      </li>
+      <li>
+        <a href=""><img src="images/photos-taking1.jpg"> </a>
+        <div class="desc">
+          <p>
+            <b>雾凇传奇7</b>
+            <i>from：晓晓</i>
+            <time>2016/10/02</time>
+          </p>
+        </div>
+      </li>
+      <li >
+        <a href=""><img src="images/photos-taking1.jpg"> </a>
+        <div class="desc">
+          <p>
+            <b>雾凇传奇8</b>
+            <i>from：晓晓</i>
+            <time>2016/10/02</time>
+          </p>
+        </div>
+      </li>
+
+
+
+    </ul>
+    </div>
+  </div>
+
+</section>
+
+<!--4.页面底部-->
+<footer>
+  <hr>
+  <p>
+    <a href="">关于我们</a>
+    <i>|</i>
+    <a href="">新闻动态</a>
+    <i>|</i>
+    <a href="">工作机会</a>
+    <i>|</i>
+    <a href="">商务合作</a>
+    <i>|</i>
+    <a href="">会员中心</a>
+    <i>|</i>
+    <a href="">业主中心</a>
+    <i>|</i>
+    <a href="">常见问题</a>
+    <i>|</i>
+    <a href="">意见反馈</a>
+    <i>|</i>
+    <a href="">联系我们</a>
+    <i>|</i>
+    <a href="">营业执照</a>
+  </p>
+  <p>&copy; 2017 游鱼网 版权所有。 游鱼网的 <a href="">使用条款</a> 和 <a href=""> 隐私政策</a>
+  <br>
+  *
+  游鱼网不是旅行社，也不是旅游预订服务代理商。我们提供免费、客观、公正的旅游资讯服务。</p>
+  <p>
+  <a href="">京ICP证080678号</a>&nbsp;&nbsp;
+  <a href="">京ICP备09040564号</a>&nbsp;&nbsp;
+  <a href="">京公网安备11010502027214号</a>
+
+  </p>
+</footer>
+<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+<script type="text/javascript" src="js/jquery-1.11.3.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/common.js"></script>
+<!-- <script src="js/slick.min.js"></script> -->
+<script type="text/javascript">
+
+// $("document").ready(function(){
+//   $("#section ul.photos li .desc p").css("z-index","-1");
+// });
+
+$("#section>div:first-child ul.photos li").hover(function(){
+  $(this).find(".desc p").fadeIn(500)
+  },
+  function(){$(this).find(".desc p").fadeOut(500)
+  }
+);
+$("#section>div:nth-child(2) ul.photos li").hover(function(){
+  $(this).find(".desc p").slideDown(500)
+  },
+  function(){$(this).find(".desc p").slideUp(500)
+  }
+);
+$("#section>div:nth-child(3) ul.photos li").hover(function(){
+        $(this).find(".desc p").slideDown(500)
+    },
+    function(){$(this).find(".desc p").slideUp(500)
+    }
+);
+
+//z最新图片实现轮播效果
+// var t = setInterval(function(){
+//   $("#new-photos li:first-child").appendTo($("#new-photos ul"))
+// },3000);
+// $(document)
+// .ready(setInterval(t))
+// $("#new-photos li").hover(
+//     function(){clearInterval(t)},
+//     function(){setInterval(t)}
+//   )
+
+$(document).ready(
+  function(){
+    setInterval(function(){
+      myAnimate()
+    },0)
+  }
+);
+function myAnimate () {
+    var move = 145;
+    var n = $("#new-photos ul li").length;
+    var ml = function(){
+      return {marginLeft: -move*n}
+      }
+    $("#new-photos ul").animate(
+      ml(),
+      15000,"linear",
+      function(){
+      $("#new-photos ul").css("marginLeft","0");
+
+      }
+    );
+    $("#new-photos ul").hover(
+      function(){$(this).stop()},
+      function(){$(this).animate(
+        ml(),
+        15000,"linear",
+        function(){
+        $("#new-photos ul").css("marginLeft","0")
+        }
+      )}
+    ) 
+}
+//});
+
+</script>
+</body>
+</html>
