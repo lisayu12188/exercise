@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>抽奖</title>
+</head>
+<style>
+    #box {
+        position: relative;
+        display:inline-block;
+    }
+    #box .pin {
+        position: absolute;
+        top:50%;
+        left:50%;
+        margin: -97px 0 0 -22px;
+    }
+    #startBtn {
+        width: 100px;
+        height: 50px;
+        font-size: 30px;
+        background: cadetblue;
+        outline: none;
+
+    }
+    #btnBox{
+        display: inline-block;
+    }
+
+</style>
+<body>
+
+<div id="box">
+    <img class="pan" src="img/pan.png" alt="">
+    <img class="pin" src="img/pin.png" alt="">
+</div>
+<div id="btnBox">
+    <button id="startBtn">抽奖</button>
+</div>
+
+<script src="js/jquery-1.11.3.js"></script>
+<script>
+    var pool = [
+        {value: '一等奖', count: 0 , status: false, code: 1},
+        {value: '二等奖', count: 0 , status: false, code: 2},
+        {value: '三等奖', count: 0 , status: false, code: 3},
+        {value: '幸运奖', count: 0 , status: false, code: 4}
+    ];//保存所有奖项
+    var counts = 10;//总共10次抽奖机会。一等奖10%，二等奖20%，三等奖30%，幸运奖40%
+    var p1 = .1;
+    var p2 = .2;
+    var p3 = .3;
+    var p4 = .4;
+    var d = 30;//每个奖项的角度
+    var t = 1;//罗盘旋转1次的秒数
+    var r, r0, r1, r2, r3, r4, r5 ;//保存随机角度区间数,r为点击一次随机奖项的角度
+    var round = 0;//随机旋转的整圈数
+    var count = 0;//记录中奖次数
+    var isLottering = false;// 记录单次抽奖是否正在进行，,true表示正在进行中，false表示单次结束
+    //随机函数
+    function getRandom (min,max) {
+        return Math.random() * (max - min ) + min
+    }
+    //点击抽奖按钮开始抽奖：
+    $('#startBtn').click(function () {
+        var box = pool.filter(function(v){ //box为奖池中剩余的奖项
+            return v.status === false
+        });
+        if( box.length === 0){
+            alert ('本次抽奖活动已结束');
+            return;
+        };
+        if(isLottering === true){
+            return;
+        };//如果正在抽奖，点击抽奖按钮无效,即不执行函数
+        isLottering = true;
+        var n = box.length;
+        var result = Math.floor(getRandom(1, n));
+        var code = box[result-1].code;
+        var select = pool[code-1].value; //box中随机抽取的奖项
+        box.forEach(function(v){
+            if( code === v.code ){
+                v.count++;
+            }
+            //判断总次奖，如果大于等于比率将status设置为true
+            if( pool[0].count >= p1*counts){
+                pool[0].status = true;
+            }
+            if( pool[1].count >= p2*counts){
+                pool[1].status = true;
+            }
+            if( pool[2].count >= p3*counts){
+                pool[2].status = true;
+            }
+            if( pool[3].count >= p4*counts){
+                pool[3].status = true;
+            }
+            //console.log(v)
+        });
+        //根据数据结果随机转动罗盘
+        if(code === 1) {
+            r = getRandom(9 * d, 10 * d);
+        }else if(code === 2) {
+            r0 = getRandom(0, 1);
+            r1 = getRandom(0, d);
+            r2 = getRandom( 7 * d, 8 * d);
+            r0 <= 1/2 ? r = r1 : r = r2;
+
+        }else if(code === 3) {
+            r0 = getRandom(0, 1);
+            r1 = getRandom(d, 2 * d);
+            r2 = getRandom(3 * d, 4 * d);
+            r3 = getRandom(5 * d, 6 * d);
+            r4 = getRandom(10 * d, 11 * d);
+            r0 <= 1/4 ? r = r1:
+            r0 <= 1/2 ? r = r2:
+            r0 <= 3/4 ? r = r3:
+                        r = r4;
+        }else if(code === 4) {
+            r0 = getRandom(0, 1);
+            r1 = getRandom(2 * d, 3 * d);
+            r2 = getRandom(4 * d, 5 * d);
+            r3 = getRandom(6 * d,7 * d);
+            r4 = getRandom(8 * d, 9 * d);
+            r5 = getRandom(11 * d, 12 * d);
+            r0 <= 1/5 ? r = r1:
+            r0 <= 2/5 ? r = r2:
+            r0 <= 3/5 ? r = r3:
+            r0 <= 4/5 ? r = r4:
+                        r = r5;
+        };
+        round += Math.floor( getRandom(3, 5) );//基于上一次抽奖随机3-5圈
+        var rd = r +360 * round;$('#box .pan').css({
+            'transform': `rotate(${rd}deg)`,
+            'transition': `transform ${t}s`
+            });
+        //t秒后弹出中奖结果
+        setTimeout(function () {
+            isLottering = false;
+            alert('恭喜您，中了：' + select);
+        },t*1000);
+        count++;//，记录抽奖次数，抽一次+1
+        var str = '已抽奖'+count+'次；\n 还剩'+ (counts - count)+'次';
+        $("#btnBox").children('b.text').remove();
+        $("#btnBox").append(`<b class="text">${str}</b>`);
+        if( count === counts) {
+            $('#startBtn').css({
+                'background':'#ddd',
+                'color':'#bbb'
+            });
+        }
+    })
+</script>
+</body>
+</html>
