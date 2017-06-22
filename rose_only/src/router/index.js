@@ -18,20 +18,9 @@ export default new Router({
       component: Index,
     },
     {
-      path: '/detail1',
+      path: '/detail/pid/:pid/cid/:cid',
       name: 'detail',
       component: Detail
     },
-    {
-      path: '/detail2',
-      name: 'detail',
-      component: Detail
-    },
-    {
-      path: '/detail3',
-      name: 'detail',
-      component: Detail
-    }
-
   ]
 })

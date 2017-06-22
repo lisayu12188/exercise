@@ -3,17 +3,24 @@
   <div class="prod-detail">
     <div class="swiper-container" id="slider">
       <div class="swiper-wrapper">
-        <div class="swiper-slide" v-for="str in listImg" :style="{ backgroundImage: 'url(' + str.url + ')' }"></div>
+        <div class="swiper-slide" v-for="mainImg in mainImgs" >
+          <img v-lazy="mainImg">
+        </div>
+        <!--<div class="swiper-slide" v-for="mainImg in mainImgs" :style="{ backgroundImage: 'url(' + mainImg + ')' }"></div>-->
       </div>
       <div class="swiper-pagination swiper-pagination-black"></div>
     </div>
     <div class="desc">
-      <h2>经典永续经典19支朱砂</h2>
+      <h2>经典永续经典19支 {{pColName}}</h2>
       <span class="price"> 价格：<b>¥1999</b> </span>
       <div class="color-box">
         <span class="label">颜色：</span>
         <ul class="color-img">
-          <li v-for="color in colors"><img :src="color.src" alt="" width="44px"></li>
+          <li v-for="color in colors">
+            <router-link :to="`/detail/pid/${color.pid}/cid/${color.co_id}`">
+            <img :src="color.co_img" alt="" width="44px">
+            </router-link>
+          </li>
         </ul>
       </div>
     </div>
@@ -35,7 +42,7 @@
         </li>
         <li>
           <b>颜色分类：</b>
-          <span>初心</span>
+          <span>{{pColName}}</span>
         </li>
         <li>
           <b>适用节日：</b>
@@ -49,7 +56,8 @@
       </ul>
       <div class="intro">
         <ul>
-          <li v-for="img in intros"><img v-lazy="img.src" alt=""></li>
+          <li v-for="introImg in introImgs"><img v-lazy="introImg" alt="详情图片"></li>
+          <li><img v-lazy="'/static/img/product/card.jpg'" alt="卡片"></li>
         </ul>
       </div>
     </div>
@@ -67,52 +75,19 @@
 import top from './Top.vue';
 import myfooter from './Footer.vue';
 import recomend from './Recomend.vue';
-
-import m1 from '../../static/img/product/m1.png';
-import m2 from '../../static/img/product/m2.png';
-import m3 from '../../static/img/product/m3.png';
-import m4 from '../../static/img/product/m4.png';
-import c1 from '../../static/img/product/c1.png';
-import c2 from '../../static/img/product/c2.png';
-import c3 from '../../static/img/product/c3.png';
-import c4 from '../../static/img/product/c4.png';
-import c5 from '../../static/img/product/c5.png';
-import d1 from '../../static/img/product/d1.jpg';
-import d2 from '../../static/img/product/d2.jpg';
-import d3 from '../../static/img/product/d3.jpg';
-import d4 from '../../static/img/product/d4.jpg';
-import d5 from '../../static/img/product/d5.jpg';
-
-
 export default {
   name: 'prod-detail',
   data () {
     return {
-      listImg: [
-        {url: m1},
-        {url: m2},
-        {url: m3},
-        {url: m4},
-      ],
-      colors: [
-        {src:c1},
-        {src:c2},
-        {src:c3},
-        {src:c4},
-        {src:c5},
-      ],
-      intros: [
-        {src:d1},
-        {src:d2},
-        {src:d3},
-        {src:d4},
-        {src:d5},
-      ]
-
+      //detailProducts: '',
+      pName: '',
+      pColName: '',
+      colors: [],
+      mainImgs: [],
+      introImgs: [],
     }
   },
   components: {
-//    top,
     myfooter,
     recomend,
   },
@@ -128,7 +103,81 @@ export default {
       }
     });
   },
+  // 组件创建完后获取数据，
+  created () {
+      this.fetchData()
+  },
+  watch: {
+    // 如果路由有变化，会再次执行该方法
+    '$route' : 'fetchData'
+  },
+  methods: {
+    fetchData () {
+      var p_id = this.$route.params.pid;//获取路由参数pid,cid
+      var c_id = this.$route.params.cid;
+      if(this.colors.cid){
+        c_id = this.colors.cid
+      };
+      var url= `http://localhost:8060/detail/pid/${p_id}/cid/${c_id}`;
+      this.$http.get(url).then(function(data){
+        var detailProducts = data.body[0][0];
+        var cimg = detailProducts.c_color_img;
+        var cid = detailProducts.cid_all;
+        var mainImgs = detailProducts.c_main_img;
+        var introImgs = detailProducts.c_intro_img;
+//      function toArray(val) {
+//        if(val){
+//          val = val.split(",");
+//          val.forEach(function(v,i){
+//            val[i] = '/static/img/product/' + v;
+//          })
+//          this.val = val;
+//          console.log(this.val);
+//          return this.val;
+//        }
+//      };
+        cimg = cimg.split(",");
+//        var reg = /,/;
+//        if(reg.test(cid)){
+          cid = cid.split(",");
+//        }else {
+//          cid = [cid];
+//        }
+
+        var colors =[];
+        cimg.forEach(function(v,i){
+          colors[i] = {co_img: '/static/img/product/' + v, co_id: cid[i],pid: p_id};
+        });
+        this.colors = colors;
+        console.log(this.colors);
+        this.pColName = detailProducts.c_color_name;
+//      toArray.call(this,mainImgs);
+//      this.mainImgs = mainImgs;
+//      toArray(introImgs);
+//      this.introImgs = introImgs;
+//      console.log(this.mainImgs);
+
+        mainImgs = mainImgs.split(",");
+        mainImgs.forEach(function(v,i){
+          mainImgs[i] = '/static/img/product/' + v;
+        })
+        this.mainImgs = mainImgs;
+
+        introImgs = introImgs.split(",");
+        introImgs.forEach(function(v,i){
+          introImgs[i] = '/static/img/product/' + v;
+        })
+        this.introImgs = introImgs;
+
+
+
+
+      })
+    }
+  }
+
 }
+
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

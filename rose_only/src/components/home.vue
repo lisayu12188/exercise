@@ -11,18 +11,22 @@
       <div class="part1">
         <h2 class="title"><img src="../../static/img/t9.jpg" alt=""></h2>
         <ul>
-          <li v-for="product in products1">
-            <router-link :to="product.route">
-            <img  v-lazy="product.src" alt="产品图片">
+          <li v-for="product in graProducts">
+            <router-link :to="`/detail/pid/${product.pid}/cid/${product.cid}`">
+            <img  v-lazy="`../../static/img/${product.img}`" alt="产品图片">
             </router-link>
           </li>
         </ul>
       </div>
       <div class="part2">
         <h2 class="title"><img src="../../static/img/t10.jpg" alt=""></h2>
-        <div>
-          <a href="#" v-for="product in products2"><img   v-lazy="product.src" alt="产品图片"></a>
-        </div>
+        <ul>
+          <li v-for="product in loveProducts">
+            <router-link  :to="`/detail/pid/${product.pid}/cid/${product.cid}`">
+              <img  v-lazy="`../../static/img/${product.img}`" alt="产品图片">
+            </router-link>
+          </li>
+        </ul>
       </div>
       <div class="part3">
         <h2 class="title"><img src="../../static/img/t8.jpg" alt=""></h2>
@@ -53,6 +57,7 @@ import c from '../../static/img/slider3.jpg';
 import d from '../../static/img/slider4.jpg';
 import e from '../../static/img/slider5.jpg';
 import f from '../../static/img/slider6.jpg';
+
 export default {
   name: 'hello',
   data () {
@@ -65,20 +70,8 @@ export default {
         {url: e},
         {url: f},
       ],
-      products1: [
-        {src: '../../static/img/g1.jpg',route:'/detail1'},
-        {src: '../../static/img/g2.jpg',route:'/detail2'},
-        {src: '../../static/img/g3.jpg',route:'/detail3'},
-        {src: '../../static/img/g4.jpg',route:'/detail4'},
-        {src: '../../static/img/g5.jpg',route:'/detail5'},
-      ],
-      products2: [
-        {src: '../../static/img/g6.jpg'},
-        {src: '../../static/img/g7.jpg'},
-        {src: '../../static/img/g8.jpg'},
-        {src: '../../static/img/g10.jpg'},
-        {src: '../../static/img/g11.jpg'},
-      ],
+      graProducts: '',//毕业礼物产品
+      loveProducts: '',//生日礼物产品
       products3: [
         {src: '../../static/img/d2.jpg'},
         {src: '../../static/img/d1.jpg'},
@@ -111,6 +104,16 @@ export default {
       }
     });
   },
+  // 组件创建完后获取数据，
+  created:
+    function() {
+      var url= "http://localhost:8060/index";
+      this.$http.get(url).then(function(data){
+        this.graProducts = data.body.slice(0,5);
+        this.loveProducts = data.body.slice(5,10)
+      });
+    },
+
   methods: {
 
 
@@ -151,9 +154,17 @@ export default {
     h2 img {
       vertical-align: bottom;
     }
-    .part4 .content img {
-      width: 50%;
+    .part4 .content {
+      display: flex;
+      flex-wrap:wrap;
+      a {
+        width: 50%;
+      }
+      img {
+        /*width: 50%;*/
+      }
     }
+
   }
 
 

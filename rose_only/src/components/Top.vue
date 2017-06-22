@@ -6,12 +6,12 @@
     </div>
     <div class="main-logo">
       <router-link to="/index">
-      <img src="static/img/nav_logo.png" alt="头部logo">
+      <img src="/static/img/nav_logo.png" alt="头部logo">
       </router-link>
     </div>
     <div class="user">
-      <img src="static/img/nav_user.png" alt="用户">
-      <img src="static/img/nav_car.png" alt="购物车">
+      <img src="/static/img/nav_user.png" alt="用户">
+      <img src="/static/img/nav_car.png" alt="购物车">
     </div>
   </div>
 </template>

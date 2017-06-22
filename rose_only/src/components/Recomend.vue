@@ -4,9 +4,9 @@
     <div class="prod-box">
       <dl v-for="item in recomends">
         <dt>
-          <a href="">
-            <img v-lazy="item.src" alt="">
-          </a>
+          <router-link :to="`/detail/pid/${item.pid}/cid/${item.cid}`">
+            <img v-lazy="`/static/img/product/${item.r_main_img}`" :alt="[item.category,item.series]">
+          </router-link>
         </dt>
         <dd>
           {{item.category}}-{{item.series}}
@@ -21,30 +21,40 @@
 </template>
 
 <script>
-  import r1 from '../../static/img/product/r1.png';
-  import r2 from '../../static/img/product/r2.png';
-  import r3 from '../../static/img/product/r3.png';
-  import r4 from '../../static/img/product/r4.png';
-  import r5 from '../../static/img/product/r5.png';
-  import r6 from '../../static/img/product/r6.png';
-  import r7 from '../../static/img/product/r7.png';
-  import r8 from '../../static/img/product/r8.png';
 export default {
   name: 'recomend',
   data () {
     return {
-      recomends:[
-        {src: r1,category:'鲜花玫瑰',style:'经典朱砂',series:'基础系列',length:'80cm 长形',price:1520},
-        {src: r2,category:'鲜花玫瑰',style:'经典朱砂',series:'经典永续系列',length:'40cm 长形',price:1990},
-        {src: r3,category:'鲜花玫瑰',style:'经典朱砂',series:'基础系列系列',length:'80cm 长形',price:2520},
-        {src: r4,category:'鲜花玫瑰',style:'经典朱砂',series:'基础系列系列',length:'80cm 长形',price:1520},
-        {src: r5,category:'鲜花玫瑰',style:'经典朱砂',series:'基础系列系列',length:'40cm 长形',price:1620},
-        {src: r6,category:'鲜花玫瑰',style:'小经典朱砂',series:'基础系列系列',length:'80cm 长形',price:1580},
-        {src: r7,category:'鲜花玫瑰',style:'玫瑰',series:'玫瑰经典系列',length:'40cm 长形',price:1820},
-        {src: r8,category:'鲜花玫瑰',style:'经典约定',series:'基础系列系列',length:'80cm 长形',price:1920},
-      ]
+      recomends:'',
+//      pid: '' ,
     }
   },
+  // 组件创建完后获取数据，
+  created () {
+    this.fetchData()
+  },
+  watch: {
+    // 如果路由有变化，会再次执行该方法
+    '$route' : 'fetchData'
+  },
+  methods: {
+    fetchData () {
+      var p_id = this.$route.params.pid;//获取路由参数pid,cid
+      var c_id = this.$route.params.cid;
+      console.log(p_id,c_id);
+
+      var url= `http://localhost:8060/detail/pid/${p_id}/cid/${c_id}`;
+      this.$http.get(url).then(function(data) {
+        console.dir(data.body[1]);
+        this.recomends = data.body[1];
+
+      })
+    },
+//    getPid () {
+//
+//    }
+  }
+
 }
 </script>
 
